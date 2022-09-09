@@ -8,9 +8,9 @@ Amphitheatre to Kubernetes.
 Charts](https://github.com/amphitheatre-app/charts/actions/workflows/release.yml/badge.svg)](https://github.com/amphitheatre-app/charts/actions/workflows/release.yml)
 [![License](https://img.shields.io/github/license/amphitheatre-app/charts)](https://github.com/amphitheatre-app/charts/blob/master/LICENSE)
 [![GitHub
-contributors](https://img.shields.io/github/contributors/amphitheatre-app/charts)](https://github.com/amphitheatre-app/desktop/graphs/charts)
+contributors](https://img.shields.io/github/contributors/amphitheatre-app/charts)](https://github.com/amphitheatre-app/charts/graphs/charts)
 [![GitHub
-issues](https://img.shields.io/github/issues/amphitheatre-app/desktop)](https://github.com/amphitheatre-app/desktop/issues)
+issues](https://img.shields.io/github/issues/amphitheatre-app/charts)](https://github.com/amphitheatre-app/charts/issues)
 
 ## Usage
 
