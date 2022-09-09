@@ -24,7 +24,7 @@ issues](https://img.shields.io/github/issues/amphitheatre-app/charts)](https://g
 ### Once Helm has been set up correctly, add the repo as follows:
 
 ```sh
-  helm repo add amphitheatre https://charts.amphitheatre.app
+  helm repo add amphitheatre https://repo.amphitheatre.app/charts
 ```
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
