@@ -19,8 +19,7 @@ Helm's [documentation](https://helm.sh/docs) to get started.
 
 > Note: The charts in this repository require Helm version 3.x or later.
 
-## 
-Once Helm has been set up correctly, add the repo as follows:
+### Once Helm has been set up correctly, add the repo as follows:
 
 ```sh
   helm repo add amphitheatre https://charts.amphitheatre.app
@@ -50,27 +49,19 @@ deletes the release.
 
 ## Documentation
 
+- **main branch** All the helm chart source code will be commited to main branch
+  (master branch), all the charts will be placed under `/charts` and each chart
+  will be  seperate with their own folder
+
+- **gh-pages** The `index.yaml` will be commited to this branch, which represent
+  an accessible page. The helm repository required an `index.yaml` file to show
+  its  charts struture
+
+- **Pipeline** Github action is set to provide helm release automation when
+  changes are commited to the main branch.
+
 See [Amphitheatre](https://amphitheatre.app) or the [Amphitheatre
 documentation](https://docs.amphitheatre.app) site for more information.
-
-## Structure
-
-- main branch
-  
-  All the helm chart source code will be commited to main branch (master
-  branch), all the charts will be placed under `/charts` and each chart will be
-  seperate with their own folder
-
-- gh-pages 
-
-  The `index.yaml` will be commited to this branch, which represent an
-  accessible page. The helm repository required an `index.yaml` file to show its
-  charts struture
-
-## Pipeline
-
-Github action is set to provide helm release automation when changes are
-commited to the main branch.
 
 ## Contributing
 
