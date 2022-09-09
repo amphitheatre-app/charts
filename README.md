@@ -80,4 +80,4 @@ modifications.
 ## License
 
 Licensed under the [Apache License
-2.0](https://github.com/amphitheatre-app/desktop/blob/master/LICENSE)
+2.0](https://github.com/amphitheatre-app/charts/blob/master/LICENSE)
