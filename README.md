@@ -14,10 +14,12 @@ issues](https://img.shields.io/github/issues/amphitheatre-app/desktop)](https://
 
 ## Usage
 
-[Helm](https://helm.sh) must be installed to use the charts.  Please refer to
-Helm's [documentation](https://helm.sh/docs) to get started.
+### Pre-requisites
 
-> Note: The charts in this repository require Helm version 3.x or later.
+- Kubernetes 1.19+
+- Helm 3.2.0+
+- PV provisioner support in the underlying infrastructure
+- ReadWriteMany volumes for deployment scaling
 
 ### Once Helm has been set up correctly, add the repo as follows:
 
@@ -49,16 +51,23 @@ deletes the release.
 
 ## Documentation
 
-- **main branch** All the helm chart source code will be commited to main branch
-  (master branch), all the charts will be placed under `/charts` and each chart
-  will be  seperate with their own folder
+- All the helm chart source code will be commited to master branch, all the
+  charts will be placed under `/charts` and each chart will be  seperate with
+  their own folder
 
-- **gh-pages** The `index.yaml` will be commited to this branch, which represent
+- The `index.yaml` will be commited to `gh-pages` branch, which represent
   an accessible page. The helm repository required an `index.yaml` file to show
-  its  charts struture
+  its charts struture
 
-- **Pipeline** Github action is set to provide helm release automation when
-  changes are commited to the main branch.
+- Github action is set to provide helm release automation when changes are
+  commited to the main branch.
+
+- Due to rapid churn in the Kubernetes ecosystem, charts in this repository
+  assume a version of Kubernetes released in the last 12 months. This typically
+  means one of the last four releases.
+
+  Note: While these charts may work with versions of older versions of
+  Kubernetes, only releases made in the last year are eligible for support.
 
 See [Amphitheatre](https://amphitheatre.app) or the [Amphitheatre
 documentation](https://docs.amphitheatre.app) site for more information.
@@ -79,5 +88,7 @@ modifications.
 
 ## License
 
-Licensed under the [Apache License
-2.0](https://github.com/amphitheatre-app/charts/blob/master/LICENSE)
+This repository's contents are licensed under the Apache License 2.0. See the
+included
+[LICENSE](https://github.com/amphitheatre-app/charts/blob/master/LICENSE) file
+for a copy.
