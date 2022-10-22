@@ -37,8 +37,8 @@ amphitheatre` to see the charts.
   helm install my-amphitheatre amphitheatre/amphitheatre
 ```
 
-The command deploys WordPress on the Kubernetes cluster in the default
-configuration.
+The command deploys Amphitheatre API Server on the Kubernetes cluster in the 
+default configuration.
 
 ### To uninstall the chart:
 
