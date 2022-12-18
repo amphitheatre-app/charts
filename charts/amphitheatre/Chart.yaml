@@ -27,3 +27,6 @@ dependencies:
   - name: harbor
     repository: https://charts.bitnami.com/bitnami
     version: 16.1.0
+  - name: vcluster
+    repository: https://charts.loft.sh
+    version: 0.13.0
