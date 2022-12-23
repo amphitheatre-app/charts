@@ -30,3 +30,6 @@ dependencies:
   - name: vcluster
     repository: https://charts.loft.sh
     version: 0.13.0
+  - name: mysql
+    repository: https://charts.bitnami.com/bitnami
+    version: 9.4.5
