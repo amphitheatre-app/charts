@@ -1,0 +1,15 @@
+dependencies:
+- name: harbor
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.1.0
+- name: vcluster
+  repository: https://charts.loft.sh
+  version: 0.13.0
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.4.5
+- name: kpack
+  repository: https://charts.amphitheatre.app
+  version: 0.1.0
+digest: sha256:ba9356011a645f364f2565d80b5a6afaa80a509d94c0640ed8958f5071d2ef59
+generated: "2022-12-30T14:45:45.705189+08:00"
