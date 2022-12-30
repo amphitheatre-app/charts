@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-logging
+data:
+  zap-logger-config: |
+    {
+      "level": "info",
+      "development": false,
+      "outputPaths": ["stdout"],
+      "errorOutputPaths": ["stderr"],
+      "encoding": "json",
+      "encoderConfig": {
+        "timeKey": "ts",
+        "levelKey": "level",
+        "nameKey": "logger",
+        "callerKey": "caller",
+        "messageKey": "msg",
+        "stacktraceKey": "stacktrace",
+        "lineEnding": "",
+        "levelEncoder": "",
+        "timeEncoder": "rfc3339nano",
+        "durationEncoder": "",
+        "callerEncoder": ""
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-init-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/build-init@sha256:a4201fba41f408f32dec3dcc11d1a4e44db7794d4d1a883dd4d20432fed0f3e6
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-init-windows-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/build-init-windows@sha256:c4961a33a4c6e269705792e58d175f06410268410bcffff85461144dd823b61c
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-waiter-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/build-waiter@sha256:e9ce0fd700d41cf6a47d21ee544aa9b065cbc32391671848841f757e830fdb13
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rebase-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/rebase@sha256:eb4acd119d2dc28e11ba7f895855fe3ad7654b4ec5886a1d8942b7575cad2a0a
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lifecycle-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/lifecycle@sha256:284a738d402060ffd196bf65c4ad1177dbf24278207bee09037eeab613653b2f
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: completion-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/completion@sha256:13a1142178e6380a81f9e03ad604553053d51e23b90b0ea41e9f2a6f0016f8cd
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: completion-windows-image
+data:
+  image: gcr.io/cf-build-service-public/kpack/completion-windows@sha256:0d8a465e660d9cd4ea4f070813bc9b8ef83b9fa8345617ea12810db0c068e8bf
