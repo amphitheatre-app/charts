@@ -3,6 +3,29 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-01-01T19:48:03.687269655Z"
+    dependencies:
+    - name: harbor
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.1.0
+    - name: vcluster
+      repository: https://charts.loft.sh
+      version: 0.13.0
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.5
+    - name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 513f5940d4b3ad77ccc203960742828233dfdbdb69c92df6e842a62bc325e51c
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.2.3/amphitheatre-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-01-01T18:59:24.307749461Z"
     dependencies:
     - name: harbor
@@ -95,4 +118,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-01T18:59:24.307772261Z"
+generated: "2023-01-01T19:48:03.687292155Z"
