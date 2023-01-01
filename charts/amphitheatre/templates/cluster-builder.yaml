@@ -1,0 +1,19 @@
+apiVersion: kpack.io/v1alpha2
+kind: ClusterBuilder
+metadata:
+  name: amp-default-builder
+spec:
+  tag: core.harbor.domain/library/amp-default-builder
+  stack:
+    name: base
+    kind: ClusterStack
+  store:
+    name: default
+    kind: ClusterStore
+  serviceAccountRef:
+    name: kpack-service-account
+  order:
+  - group:
+    - id: paketo-buildpacks/java
+  - group:
+    - id: paketo-buildpacks/nodejs
