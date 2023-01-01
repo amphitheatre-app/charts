@@ -3,7 +3,7 @@ kind: ClusterBuilder
 metadata:
   name: amp-default-builder
 spec:
-  tag: core.harbor.domain/library/amp-default-builder
+  tag: ttl.sh/amp-default-builder
   stack:
     name: base
     kind: ClusterStack
