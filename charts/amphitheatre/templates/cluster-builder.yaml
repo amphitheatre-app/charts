@@ -1,14 +1,17 @@
 apiVersion: kpack.io/v1alpha2
 kind: ClusterBuilder
 metadata:
-  name: amp-default-builder
+  name: amp-default-cluster-builder
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
 spec:
-  tag: ttl.sh/amp-default-builder
+  tag: ttl.sh/amp-default-cluster-builder
   stack:
-    name: base
+    name: amp-default-cluster-stack
     kind: ClusterStack
   store:
-    name: default
+    name: amp-default-cluster-store
     kind: ClusterStore
   serviceAccountRef:
     name: kpack-service-account

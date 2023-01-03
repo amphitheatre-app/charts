@@ -1,0 +1,96 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: playbooks.amphitheatre.app
+spec:
+  group: amphitheatre.app
+  names:
+    categories: []
+    kind: Playbook
+    plural: playbooks
+    shortNames: []
+    singular: playbook
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns: []
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for PlaybookSpec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              actors:
+                items:
+                  properties:
+                    commit:
+                      description: The selected commit of the actor.
+                      type: string
+                    description:
+                      description: The description of the actor.
+                      type: string
+                    environment:
+                      additionalProperties:
+                        type: string
+                      type: object
+                    image:
+                      description: 'Specifies the image to launch the container. The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].'
+                      type: string
+                    name:
+                      description: The title of the actor.
+                      type: string
+                    partners:
+                      items:
+                        type: string
+                      type: array
+                    path:
+                      description: Relative path from the repo root to the configuration file. eg. getting-started/amp.yaml.
+                      type: string
+                    reference:
+                      description: Git ref the package should be cloned from. eg. master or main
+                      type: string
+                    repo:
+                      description: Git repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                      type: string
+                  required:
+                  - commit
+                  - description
+                  - environment
+                  - image
+                  - name
+                  - partners
+                  - path
+                  - reference
+                  - repo
+                  type: object
+                minItems: 1
+                type: array
+              description:
+                type: string
+              title:
+                type: string
+            required:
+            - actors
+            - description
+            - title
+            type: object
+          status:
+            enum:
+            - Pending
+            - Solving
+            - Solved
+            - Building
+            - Running
+            - Succeeded
+            - Failed
+            - Unknown
+            nullable: true
+            type: string
+        required:
+        - spec
+        title: Playbook
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

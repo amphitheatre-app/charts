@@ -1,7 +1,10 @@
 apiVersion: kpack.io/v1alpha2
 kind: ClusterStore
 metadata:
-  name: default
+  name: amp-default-cluster-store
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
 spec:
   sources:
   - image: gcr.io/paketo-buildpacks/java
