@@ -4,9 +4,9 @@ metadata:
   name: amp-default-cluster-builder
   annotations:
     "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-weight": "-4"
 spec:
-  tag: ttl.sh/amp-default-cluster-builder
+  tag: {{ .Values.registry }}/amp-default-cluster-builder
   stack:
     name: amp-default-cluster-stack
     kind: ClusterStack
@@ -14,7 +14,8 @@ spec:
     name: amp-default-cluster-store
     kind: ClusterStore
   serviceAccountRef:
-    name: kpack-service-account
+    name: amp-default-builder-service-account
+    namespace: {{ .Release.Namespace }}
   order:
   - group:
     - id: paketo-buildpacks/java
