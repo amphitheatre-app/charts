@@ -1,3 +1,4 @@
+{{- if eq .Values.runtime "docker" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -24,3 +25,4 @@ data:
     echo "Certificates copied"
     echo $FOLDER/client.cert
     cat $FOLDER/client.cert
+{{- end }}

@@ -1,3 +1,4 @@
+{{- if eq .Values.runtime "containerd" }}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -29,6 +30,9 @@ spec:
           readOnly: true
         - mountPath: /scripts
           name: entrypoint
+        - mountPath: /etc/config
+          name: containerd-config
+          readOnly: true
       hostNetwork: true
       hostPID: true
       volumes:
@@ -43,6 +47,17 @@ spec:
         configMap:
           name: entrypoint
           defaultMode: 0744
+          items:
+          - key: entrypoint.sh
+            path: entrypoint.sh
+      - name: containerd-config
+        configMap:
+          name: entrypoint
+          defaultMode: 0744
+          items:
+          - key: custom_config.toml
+            path: custom_config.toml
       containers:
       - image: gcr.io/google-containers/pause:3.2
         name: pause
+{{- end }}

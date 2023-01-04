@@ -1,0 +1,43 @@
+{{- if eq .Values.runtime "containerd" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entrypoint
+  labels:
+    app: default-init
+data:
+  custom_config.toml: |
+    [plugins.cri.registry.mirrors."{{ .Values.registry }}"]
+      endpoint = ["https://{{ .Values.registry }}"]
+    [plugins.cri.registry.configs."{{ .Values.registry }}".tls]
+      ca_file = "/etc/custom-certs/cert.pem"
+  entrypoint.sh: |
+    #!/usr/bin/env bash
+
+    set -euo pipefail
+    export REGISTRY_FQDN={{ .Values.registry }}
+
+    echo "Deleting the custom certificate file if it exists"
+    rm -rf /mnt/etc/custom-certs
+    mkdir /mnt/etc/custom-certs
+
+    echo "Copying the custom certificate"
+    cp /registry/tls.crt /mnt/etc/custom-certs/cert.pem
+
+    echo "Checking if the custom config is already applied"
+    if ! grep -q $REGISTRY_FQDN /mnt/etc/containerd/config.toml; then
+      echo "Appending the custom config to the end of the config file"
+      cat /etc/config/custom_config.toml >> /mnt/etc/containerd/config.toml
+
+      if grep -q 'plugins."io.containerd.grpc.v1.cri".registry' /mnt/etc/containerd/config.toml; then
+        sed -i 's@plugins.cri.registry@plugins."io.containerd.grpc.v1.cri".registry@' /mnt/etc/containerd/config.toml
+      fi
+
+      cat /mnt/etc/containerd/config.toml
+
+      echo "restaring containerd"
+      nsenter --target 1 --mount systemctl restart containerd
+    else
+      echo "skiped applying the custom config"
+    fi
+{{- end }}
