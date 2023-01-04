@@ -14,7 +14,9 @@ harbor:
     type: ClusterIP
   nginx:
     tls:
+      enabled: true
       commonName: harbor.amp-system.svc.cluster.local
+      existingSecret: nginx-tls-secret
 vcluster:
   enabled: false
 
