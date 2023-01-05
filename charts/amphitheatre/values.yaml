@@ -2,7 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-runtime: containerd
 registry: harbor.amp-system.svc.cluster.local
 
 harbor:
@@ -15,14 +14,7 @@ harbor:
     type: ClusterIP
   nginx:
     tls:
-      enabled: true
-      commonName: harbor.amp-system.svc.cluster.local
-      existingSecret: nginx-tls-secret
-vcluster:
-  enabled: false
-
-mysql:
-  enabled: false
+      enabled: false
 
 kpack:
   enabled: true
