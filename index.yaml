@@ -3,6 +3,25 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-01-12T09:53:38.956444308Z"
+    dependencies:
+    - condition: harbor.enabled
+      name: harbor
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.1.0
+    - condition: kpack.enabled
+      name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 838b25854f3fc79cb7563eb357f6992224a90743e7a153ac0758f9f895560ed3
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.3.0/amphitheatre-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-01-11T16:21:09.224212319Z"
     dependencies:
     - condition: harbor.enabled
@@ -264,4 +283,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-11T16:21:09.22427262Z"
+generated: "2023-01-12T09:53:38.956508308Z"
