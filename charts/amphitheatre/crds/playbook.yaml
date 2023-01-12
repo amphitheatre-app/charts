@@ -32,6 +32,7 @@ spec:
                     environment:
                       additionalProperties:
                         type: string
+                      nullable: true
                       type: object
                     image:
                       description: 'Specifies the image to launch the container. The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].'
@@ -42,6 +43,7 @@ spec:
                     partners:
                       items:
                         type: string
+                      nullable: true
                       type: array
                     path:
                       description: Relative path from the repo root to the configuration file. eg. getting-started/amp.yaml.
@@ -52,13 +54,39 @@ spec:
                     repo:
                       description: Git repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
                       type: string
+                    services:
+                      items:
+                        properties:
+                          kind:
+                            type: string
+                          ports:
+                            items:
+                              properties:
+                                expose:
+                                  type: boolean
+                                port:
+                                  format: uint32
+                                  minimum: 0.0
+                                  type: integer
+                                protocol:
+                                  type: string
+                              required:
+                              - expose
+                              - port
+                              - protocol
+                              type: object
+                            type: array
+                        required:
+                        - kind
+                        - ports
+                        type: object
+                      nullable: true
+                      type: array
                   required:
                   - commit
                   - description
-                  - environment
                   - image
                   - name
-                  - partners
                   - path
                   - reference
                   - repo
@@ -109,8 +137,6 @@ spec:
                   - type
                   type: object
                 type: array
-            required:
-            - conditions
             type: object
         required:
         - spec
