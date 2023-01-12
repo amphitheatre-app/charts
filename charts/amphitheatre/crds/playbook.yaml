@@ -10,7 +10,7 @@ spec:
     plural: playbooks
     shortNames: []
     singular: playbook
-  scope: Namespaced
+  scope: Cluster
   versions:
   - additionalPrinterColumns: []
     name: v1
@@ -95,11 +95,14 @@ spec:
                 type: array
               description:
                 type: string
+              namespace:
+                type: string
               title:
                 type: string
             required:
             - actors
             - description
+            - namespace
             - title
             type: object
           status:
