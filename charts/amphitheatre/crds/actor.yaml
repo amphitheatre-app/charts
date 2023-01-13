@@ -55,13 +55,13 @@ spec:
                       type: string
                     reference:
                       description: Git ref the package should be cloned from. eg. master or main
+                      nullable: true
                       type: string
                     repository:
                       description: Source code repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
                       type: string
                   required:
                   - name
-                  - reference
                   - repository
                   type: object
                 nullable: true
@@ -72,6 +72,7 @@ spec:
                 type: string
               reference:
                 description: Git ref the package should be cloned from. eg. master or main
+                nullable: true
                 type: string
               repository:
                 description: Source code repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
@@ -116,7 +117,6 @@ spec:
             - description
             - image
             - name
-            - reference
             - repository
             type: object
           status:
