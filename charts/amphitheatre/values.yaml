@@ -2,19 +2,42 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-registry: harbor.amp-system.svc.cluster.local
+registry: registry.amphitheatre.local
+
+cert-manager:
+  enabled: false
+  installCRDs: true
+  podDnsPolicy: "None"
+  podDnsConfig:
+    nameservers:
+      - "1.1.1.1"
+      - "8.8.8.8"
 
 harbor:
   enabled: true
   fullnameOverride: harbor
   adminPassword: "Harbor12345"
-  externalURL: harbor.amp-system.svc.cluster.local
-  exposureType: proxy
-  service:
-    type: ClusterIP
-  nginx:
-    tls:
-      enabled: false
-
+  externalURL: http://registry.amphitheatre.local
+  exposureType: ingress
+  ingress:
+    core:
+      hostname: registry.amphitheatre.local
+      annotations:
+        ingress.kubernetes.io/ssl-redirect: 'false'
+        # ingress.kubernetes.io/proxy-body-size: '0'
+        nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+        # nginx.ingress.kubernetes.io/proxy-body-size: '0'
+        kubernetes.io/ingress.class: nginx
+        # cert-manager.io/cluster-issuer: lets-encrypt-cluster-issuer
+        # cert-manager.io/issue-temporary-certificate: "true"
+        # acme.cert-manager.io/http01-edit-in-place: "true"
+      tls: false
 kpack:
   enabled: true
+
+ingress-nginx:
+  enabled: true
+  controller:
+    kind: DaemonSet
+    service:
+      enableHttps: false
