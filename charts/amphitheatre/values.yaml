@@ -2,36 +2,46 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-registry: registry.amphitheatre.local
+registry: registry.amphitheatre.app
 
 cert-manager:
-  enabled: false
+  enabled: true
   installCRDs: true
-  podDnsPolicy: "None"
-  podDnsConfig:
-    nameservers:
-      - "1.1.1.1"
-      - "8.8.8.8"
+  podDnsPolicy: "Default"
+  # podDnsConfig:
+  #   nameservers:
+  #     - "1.1.1.1"
+  #     - "8.8.8.8"
 
 harbor:
   enabled: true
   fullnameOverride: harbor
   adminPassword: "Harbor12345"
-  externalURL: http://registry.amphitheatre.local
+
+  # externalURL: harbor.amp-system.svc.cluster.local
+  # exposureType: proxy
+  # service:
+  #   type: ClusterIP
+  # nginx:
+  #   tls:
+  #     enabled: false
+
+  externalURL: registry.amphitheatre.app
   exposureType: ingress
   ingress:
     core:
-      hostname: registry.amphitheatre.local
+      hostname: registry.amphitheatre.app
       annotations:
-        ingress.kubernetes.io/ssl-redirect: 'false'
-        # ingress.kubernetes.io/proxy-body-size: '0'
-        nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-        # nginx.ingress.kubernetes.io/proxy-body-size: '0'
+        ingress.kubernetes.io/ssl-redirect: 'true'
+        ingress.kubernetes.io/proxy-body-size: '0'
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+        nginx.ingress.kubernetes.io/proxy-body-size: '0'
         kubernetes.io/ingress.class: nginx
-        # cert-manager.io/cluster-issuer: lets-encrypt-cluster-issuer
-        # cert-manager.io/issue-temporary-certificate: "true"
-        # acme.cert-manager.io/http01-edit-in-place: "true"
-      tls: false
+        cert-manager.io/cluster-issuer: lets-encrypt-cluster-issuer
+        cert-manager.io/issue-temporary-certificate: "true"
+        acme.cert-manager.io/http01-edit-in-place: "true"
+      tls: true
+
 kpack:
   enabled: true
 
@@ -40,4 +50,4 @@ ingress-nginx:
   controller:
     kind: DaemonSet
     service:
-      enableHttps: false
+      enableHttps: true
