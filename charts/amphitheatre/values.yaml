@@ -4,6 +4,9 @@
 
 registry: registry.amphitheatre.app
 
+crds:
+  enabled: true
+
 cert-manager:
   enabled: true
   installCRDs: true
