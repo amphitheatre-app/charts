@@ -3,6 +3,37 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-01-27T07:06:57.462831497Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: 1.11.0
+    - condition: crds.enabled
+      name: amphitheatre-crds
+      repository: ""
+      version: 0.1.0
+    - condition: harbor.enabled
+      name: harbor
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.1.0
+    - condition: kpack.enabled
+      name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.1.0
+    - condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.4.2
+    description: A Helm chart for Kubernetes
+    digest: 7f3e7aaa33c7536cb3cb168d209be8905a93b13b0bd6dddfd6e189406319badc
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.3.7/amphitheatre-0.3.7.tgz
+    version: 0.3.7
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-01-25T15:36:30.753732777Z"
     dependencies:
     - condition: cert-manager.enabled
@@ -405,4 +436,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-25T15:36:30.753934176Z"
+generated: "2023-01-27T07:06:57.462940197Z"
