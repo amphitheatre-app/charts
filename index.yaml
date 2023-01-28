@@ -3,6 +3,25 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-01-28T12:59:01.921196225Z"
+    dependencies:
+    - condition: crds.enabled
+      name: amphitheatre-crds
+      repository: ""
+      version: 0.1.0
+    - condition: kpack.enabled
+      name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 316aec4445da70a274a506e99d1a0aeb5c8e285a218608cdda65ec15d9f780e8
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.4.0/amphitheatre-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-01-27T07:06:57.462831497Z"
     dependencies:
     - condition: cert-manager.enabled
@@ -436,4 +455,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-27T07:06:57.462940197Z"
+generated: "2023-01-28T12:59:01.921312331Z"
