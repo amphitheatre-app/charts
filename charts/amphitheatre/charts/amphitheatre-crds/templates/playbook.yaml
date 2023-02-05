@@ -24,6 +24,42 @@ spec:
                 description: All the actors involved in this playbook
                 items:
                   properties:
+                    build:
+                      description: Describes how images are built.
+                      nullable: true
+                      properties:
+                        builder:
+                          description: |-
+                            Builds images using Cloud Native Buildpacks.
+
+                            Builder image used.
+                          nullable: true
+                          type: string
+                        buildpacks:
+                          description: A list of strings, where each string is a specific buildpack to use with the builder. If you specify buildpacks the builder image automatic detection will be ignored. These buildpacks will be used to build the Image from your source code. Order matters.
+                          nullable: true
+                          type: string
+                        context:
+                          description: |-
+                            Global parameters
+
+                            Directory containing the artifact's sources.
+                          nullable: true
+                          type: string
+                        dockerfile:
+                          description: |-
+                            Builds images using kaniko.
+
+                            Locates the Dockerfile relative to workspace.
+                          nullable: true
+                          type: string
+                        env:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables, in the key=value form, passed to the build.
+                          nullable: true
+                          type: object
+                      type: object
                     command:
                       description: overrides the default command declared by the container image (i.e. by Dockerfile’s CMD)
                       nullable: true
@@ -97,8 +133,7 @@ spec:
                                   nullable: true
                                   type: boolean
                                 port:
-                                  format: uint32
-                                  minimum: 0.0
+                                  format: int32
                                   type: integer
                                 protocol:
                                   nullable: true
