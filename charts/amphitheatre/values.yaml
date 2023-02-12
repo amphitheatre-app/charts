@@ -7,8 +7,8 @@
 
 ## Amphitheatre CRDs Parameters
 crds:
-  # Switch to enable or disable the amphitheatre-crds helm chart
-  enabled: true
+  # Switch to install or uninstall the amphitheatre-crds helm chart
+  install: true
 
 # ## Cert Manager Parameters
 # cert-manager:
@@ -78,9 +78,9 @@ crds:
 #   #     tls: true
 
 ## Kpack Parameters
-kpack:
-  # Switch to enable or disable the kpack helm chart
-  enabled: true
+#kpack:
+#  # Switch to enable or disable the kpack helm chart
+#  enabled: false
 
 # ## Ingress Nginx Parameters
 # ingress-nginx:

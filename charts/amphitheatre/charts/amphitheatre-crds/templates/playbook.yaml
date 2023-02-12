@@ -37,8 +37,10 @@ spec:
                           type: string
                         buildpacks:
                           description: A list of strings, where each string is a specific buildpack to use with the builder. If you specify buildpacks the builder image automatic detection will be ignored. These buildpacks will be used to build the Image from your source code. Order matters.
+                          items:
+                            type: string
                           nullable: true
-                          type: string
+                          type: array
                         context:
                           description: |-
                             Global parameters
