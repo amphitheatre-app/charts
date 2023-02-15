@@ -25,30 +25,15 @@ spec:
                 nullable: true
                 properties:
                   builder:
-                    description: |-
-                      Builds images using Cloud Native Buildpacks.
-
-                      Builder image used.
+                    description: Builds images using Cloud Native Buildpacks, which Cluster Builder image used.
                     nullable: true
                     type: string
-                  buildpacks:
-                    description: A list of strings, where each string is a specific buildpack to use with the builder. If you specify buildpacks the builder image automatic detection will be ignored. These buildpacks will be used to build the Image from your source code. Order matters.
-                    items:
-                      type: string
-                    nullable: true
-                    type: array
                   context:
-                    description: |-
-                      Global parameters
-
-                      Directory containing the artifact's sources.
+                    description: Directory containing the artifact's sources.
                     nullable: true
                     type: string
                   dockerfile:
-                    description: |-
-                      Builds images using kaniko.
-
-                      Locates the Dockerfile relative to workspace.
+                    description: Builds images using kaniko. Locates the Dockerfile relative to workspace.
                     nullable: true
                     type: string
                   env:

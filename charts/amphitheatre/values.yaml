@@ -78,9 +78,9 @@ crds:
 #   #     tls: true
 
 ## Kpack Parameters
-#kpack:
-#  # Switch to enable or disable the kpack helm chart
-#  enabled: false
+kpack:
+  # Switch to enable or disable the kpack helm chart
+  enabled: true
 
 # ## Ingress Nginx Parameters
 # ingress-nginx:
