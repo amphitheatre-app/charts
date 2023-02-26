@@ -42,16 +42,26 @@ spec:
                     description: Environment variables, in the key=value form, passed to the build.
                     nullable: true
                     type: object
+                  exclude:
+                    description: Files to exclude when building.
+                    items:
+                      type: string
+                    nullable: true
+                    type: array
+                  include:
+                    description: Files to include when building.
+                    items:
+                      type: string
+                    nullable: true
+                    type: array
                 type: object
               command:
                 description: overrides the default command declared by the container image (i.e. by Dockerfile’s CMD)
                 nullable: true
                 type: string
-              commit:
-                description: The selected commit of the actor.
-                type: string
               description:
                 description: The description of the actor.
+                nullable: true
                 type: string
               environments:
                 additionalProperties:
@@ -66,59 +76,58 @@ spec:
                 description: The name of the actor.
                 type: string
               partners:
-                description: Depend on other partners from other repositories, or subdirectories on your local file system.
-                items:
+                additionalProperties:
+                  description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
                   properties:
-                    name:
-                      description: The name of the character.
+                    branch:
+                      description: Git branch the partner should be cloned from. eg. master or main
+                      nullable: true
                       type: string
                     path:
-                      description: Relative path from the repo root to the configuration file. eg. getting-started/amp.toml. default is `./.amp.toml`.
+                      description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `./.amp.toml`.
                       nullable: true
                       type: string
-                    reference:
-                      description: Git ref the package should be cloned from. eg. master or main
-                      nullable: true
+                    repo:
+                      description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
                       type: string
-                    repository:
-                      description: Source code repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                    rev:
+                      description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                      type: string
+                    tag:
+                      description: Git tag the partner should be cloned from. eg. v1.0
+                      nullable: true
                       type: string
                   required:
-                  - name
-                  - repository
+                  - repo
+                  - rev
                   type: object
+                description: Depend on other partners from other repositories, or subdirectories on your local file system.
                 nullable: true
-                type: array
-              path:
-                description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `./.amp.toml`.
-                nullable: true
-                type: string
-              reference:
-                description: Git ref the package should be cloned from. eg. master or main
-                nullable: true
-                type: string
-              repository:
-                description: Source code repository the package should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
-                type: string
+                type: object
               services:
                 description: Defines the behavior of a service
                 items:
                   description: Defines the behavior of a service
                   properties:
                     kind:
+                      description: Type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
                       nullable: true
                       type: string
                     ports:
+                      description: The list of ports that are exposed by this service.
                       items:
                         description: List of ports to expose from the container.
                         properties:
                           expose:
+                            description: Exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
                             nullable: true
                             type: boolean
                           port:
+                            description: The port that will be exposed by this service.
                             format: int32
                             type: integer
                           protocol:
+                            description: The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
                             nullable: true
                             type: string
                         required:
@@ -130,16 +139,39 @@ spec:
                   type: object
                 nullable: true
                 type: array
+              source:
+                description: The source of the actor.
+                properties:
+                  branch:
+                    description: Git branch the partner should be cloned from. eg. master or main
+                    nullable: true
+                    type: string
+                  path:
+                    description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `./.amp.toml`.
+                    nullable: true
+                    type: string
+                  repo:
+                    description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                    type: string
+                  rev:
+                    description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                    type: string
+                  tag:
+                    description: Git tag the partner should be cloned from. eg. v1.0
+                    nullable: true
+                    type: string
+                required:
+                - repo
+                - rev
+                type: object
               sync:
                 description: sync mode, if enabled, pulls the latest code from source version control in real time via Webhook, etc. and then rebuilds and deploys it
                 nullable: true
                 type: boolean
             required:
-            - commit
-            - description
             - image
             - name
-            - repository
+            - source
             type: object
           status:
             nullable: true
