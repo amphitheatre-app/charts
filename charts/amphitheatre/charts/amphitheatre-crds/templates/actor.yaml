@@ -84,7 +84,7 @@ spec:
                       nullable: true
                       type: string
                     path:
-                      description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `./.amp.toml`.
+                      description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
                       nullable: true
                       type: string
                     repo:
@@ -92,6 +92,7 @@ spec:
                       type: string
                     rev:
                       description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                      nullable: true
                       type: string
                     tag:
                       description: Git tag the partner should be cloned from. eg. v1.0
@@ -99,7 +100,6 @@ spec:
                       type: string
                   required:
                   - repo
-                  - rev
                   type: object
                 description: Depend on other partners from other repositories, or subdirectories on your local file system.
                 nullable: true
@@ -147,7 +147,7 @@ spec:
                     nullable: true
                     type: string
                   path:
-                    description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `./.amp.toml`.
+                    description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
                     nullable: true
                     type: string
                   repo:
@@ -155,6 +155,7 @@ spec:
                     type: string
                   rev:
                     description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                    nullable: true
                     type: string
                   tag:
                     description: Git tag the partner should be cloned from. eg. v1.0
@@ -162,7 +163,6 @@ spec:
                     type: string
                 required:
                 - repo
-                - rev
                 type: object
               sync:
                 description: sync mode, if enabled, pulls the latest code from source version control in real time via Webhook, etc. and then rebuilds and deploys it
