@@ -1,92 +1,98 @@
-# Default values for amphitheatre.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+## @section Amphitheatre APIServer paramters
+apiserver:
+  registry: ghcr.io
+  repository: amphitheatre-app/amp-apiserver
+  tag: v23-04-09-01
+  digest: ""
 
-## Global parameters
-# registry: registry.amphitheatre.app
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  pullPolicy: IfNotPresent
 
-## Amphitheatre CRDs Parameters
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## e.g:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  pullSecrets: []
+
+  ## @param replicaCount Number of WordPress replicas to deploy
+  replicaCount: 1
+
+  ## Enable debug mode
+  debug: false
+
+## @section Database paramters
+
+## MySQL chart configuration
+## ref: https://github.com/bitnami/charts/blob/main/bitnami/mysql/values.yaml
+mysql:
+  ## @param mysql.enabled Deploy a MySQL server to satisfy the application database requirement
+  ## To use an external database set this to false and configure the `externalDatabase.*` parameters
+  enabled: true
+
+  ## @param mysql.auth.rootPassword MySQL root password
+  ## @param mysql.auth.database MySQL custom database
+  ## @param mysql.auth.username MySQL custom user name
+  ## @param mysql.auth.password MySQL custom user password
+  auth:
+    rootPassword: ""
+    database: amphitheatre
+    username: amphitheatre
+    password: ""
+
+## External Database configuration
+## All of these values are only used if `mysql.enabled=false`
+externalDatabase:
+  ## @param externalDatabase.host External Database server host
+  host: localhost
+
+  ## @param externalDatabase.port External Database server port
+  port: 3306
+
+  ## @param externalDatabase.username External Database username
+  username: amphitheatre
+
+  ## @param externalDatabase.password External Database database password
+  password: ""
+
+  ## @param externalDatabase.database ExternalDatabase database name
+  database: amphitheatre
+
+## @section Amphitheatre Controllers paramters
+controllers:
+  registry: ghcr.io
+  repository: amphitheatre-app/amp-controllers
+  tag: v23-04-09-01
+  digest: ""
+
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  pullPolicy: IfNotPresent
+
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## e.g:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  pullSecrets: []
+
+  ## @param replicaCount Number of WordPress replicas to deploy
+  replicaCount: 1
+
+  ## Enable debug mode
+  debug: false
+
+## @section Amphitheatre CRDs Parameters
 crds:
   # Switch to install or uninstall the amphitheatre-crds helm chart
   install: true
 
-# ## Cert Manager Parameters
-# cert-manager:
-#   # Switch to enable or disable the cert-manager helm chart
-#   enabled: false
-#   installCRDs: true
-#   # podDnsPolicy: "Default"
-#   # podDnsConfig:
-#   #   nameservers:
-#   #     - "1.1.1.1"
-#   #     - "8.8.8.8"
-
-# ## Harbor Parameters
-# harbor:
-#   # # Switch to enable or disable the harbor helm chart
-#   # enabled: true
-#   # # String to fully override common.names.fullname template with a string
-#   # fullnameOverride: harbor
-#   # # The initial password of Harbor admin.
-#   # adminPassword: "Harbor12345"
-
-#   # # # The external URL for Harbor Core service
-#   # externalURL: https://registry.amphitheatre.app
-#   # # The way to expose Harbor. Allowed values are [ ingress | proxy ]
-#   # # Use "proxy" to use a deploy NGINX proxy in front of Harbor services
-#   # exposureType: proxy
-#   # # Service parameters
-#   # service:
-#   #   # NGINX proxy service type
-#   #   type: ClusterIP
-#   #   # Additional custom annotations for NGINX proxy service
-#   #   annotations:
-#   #     # cert-manager.io/cluster-issuer: lets-encrypt-cluster-issuer
-#   #     # cert-manager.io/issue-temporary-certificate: "true"
-#   #     # acme.cert-manager.io/http01-edit-in-place: "true"
-#   # # NGINX Parameters
-#   # nginx:
-#   #   # TLS parameters
-#   #   tls:
-#   #     # Enable TLS termination
-#   #     enabled: true
-#   #     # existingSecret: harbor-nginx-proxy-certificate
-#   #     # The common name used to generate the self-signed TLS certificates
-#   #     commonName: registry.amphitheatre.app
-
-#   # # # The external URL for Harbor Core service
-#   # externalURL: https://registry.amphitheatre.app
-#   # # The way to expose Harbor. Allowed values are [ ingress | proxy ]
-#   # # Use "ingress" to use an Ingress Controller as proxy
-#   # exposureType: ingress
-#   # # Ingress parameters
-#   # ingress:
-#   #   # Configure the ingress resource that allows you to access Harbor Core
-#   #   core:
-#   #     # Default host for the ingress record
-#   #     hostname: registry.amphitheatre.app
-#   #     # Additional annotations for the Ingress resource
-#   #     annotations:
-#   #       kubernetes.io/ingress.class: nginx
-#   #       ingress.kubernetes.io/ssl-redirect: 'true'
-#   #       ingress.kubernetes.io/proxy-body-size: '0'
-#   #       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-#   #       nginx.ingress.kubernetes.io/proxy-body-size: '0'
-#   #       cert-manager.io/cluster-issuer: lets-encrypt-cluster-issuer
-#   #       # cert-manager.io/issue-temporary-certificate: "true"
-#   #       # acme.cert-manager.io/http01-edit-in-place: "true"
-#   #     tls: true
-
-## Kpack Parameters
+## @section Kpack Parameters
 kpack:
   # Switch to enable or disable the kpack helm chart
   enabled: true
-
-# ## Ingress Nginx Parameters
-# ingress-nginx:
-#   # Switch to enable or disable the ingress-nginx helm chart
-#   enabled: false
-#   controller:
-#     kind: DaemonSet
-#     service:
-#       enableHttps: true
