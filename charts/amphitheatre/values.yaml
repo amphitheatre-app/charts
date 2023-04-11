@@ -1,4 +1,4 @@
-## @section Amphitheatre APIServer paramters
+## @section Amphitheatre APIServer parameters
 apiserver:
   registry: ghcr.io
   repository: amphitheatre-app/amp-apiserver
@@ -24,7 +24,7 @@ apiserver:
   ## Enable debug mode
   debug: false
 
-## @section Database paramters
+## @section Database parameters
 
 ## MySQL chart configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/mysql/values.yaml
@@ -61,7 +61,7 @@ externalDatabase:
   ## @param externalDatabase.database ExternalDatabase database name
   database: amphitheatre
 
-## @section Amphitheatre Controllers paramters
+## @section Amphitheatre Controllers parameters
 controllers:
   registry: ghcr.io
   repository: amphitheatre-app/amp-controllers

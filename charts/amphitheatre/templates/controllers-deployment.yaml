@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amp-controllers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amp-controllers
+  template:
+    metadata:
+      labels:
+        app: amp-controllers
+        version: v23-04-09-01
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+      - name: amp-controllers
+        securityContext:
+          runAsNonRoot: true
+        image: ghcr.io/amphitheatre-app/amp-controllers:v23-04-09-01
