@@ -2,17 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: amp-apiserver
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    app.kubernetes.io/component: amp-apiserver
 spec:
-  replicas: 1
+  replicas: {{ .Values.apiserver.replicaCount }}
   selector:
     matchLabels:
-      app: amp-apiserver
+      app.kubernetes.io/component: amp-apiserver
   template:
     metadata:
       labels:
-        app: amp-apiserver
-        version: v23-04-09-01
+        app.kubernetes.io/component: amp-apiserver
     spec:
+      {{- if .Values.apiserver.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.apiserver.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
       securityContext:
         runAsNonRoot: true
       nodeSelector:
@@ -21,4 +29,5 @@ spec:
       - name: amp-apiserver
         securityContext:
           runAsNonRoot: true
-        image: ghcr.io/amphitheatre-app/amp-apiserver:v23-04-09-01
+        image: {{ include "amphitheatre.apiserver.image" . }}
+        imagePullPolicy: {{ .Values.apiserver.pullPolicy }}

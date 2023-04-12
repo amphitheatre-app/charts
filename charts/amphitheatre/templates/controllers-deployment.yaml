@@ -2,17 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: amp-controllers
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    app.kubernetes.io/component: amp-controllers
 spec:
-  replicas: 1
+  replicas: {{ .Values.controllers.replicaCount }}
   selector:
     matchLabels:
-      app: amp-controllers
+      app.kubernetes.io/component: amp-controllers
   template:
     metadata:
       labels:
-        app: amp-controllers
-        version: v23-04-09-01
+        app.kubernetes.io/component: amp-controllers
     spec:
+      {{- if .Values.controllers.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.controllers.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
       securityContext:
         runAsNonRoot: true
       nodeSelector:
@@ -21,4 +29,5 @@ spec:
       - name: amp-controllers
         securityContext:
           runAsNonRoot: true
-        image: ghcr.io/amphitheatre-app/amp-controllers:v23-04-09-01
+        image: {{ include "amphitheatre.controllers.image" . }}
+        imagePullPolicy: {{ .Values.controllers.pullPolicy }}

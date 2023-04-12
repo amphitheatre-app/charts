@@ -3,7 +3,6 @@ apiserver:
   registry: ghcr.io
   repository: amphitheatre-app/amp-apiserver
   tag: v23-04-09-01
-  digest: ""
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -66,7 +65,6 @@ controllers:
   registry: ghcr.io
   repository: amphitheatre-app/amp-controllers
   tag: v23-04-09-01
-  digest: ""
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
