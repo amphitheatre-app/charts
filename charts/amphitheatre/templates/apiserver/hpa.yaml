@@ -1,0 +1,28 @@
+{{- if .Values.apiserver.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "amphitheatre.apiserver.fullname" . }}
+  labels:
+    {{- include "amphitheatre.apiserver.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "amphitheatre.apiserver.fullname" . }}
+  minReplicas: {{ .Values.apiserver.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.apiserver.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.apiserver.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.apiserver.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.apiserver.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.apiserver.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,28 @@
+{{- if .Values.controllers.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "amphitheatre.controllers.fullname" . }}
+  labels:
+    {{- include "amphitheatre.controllers.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "amphitheatre.controllers.fullname" . }}
+  minReplicas: {{ .Values.controllers.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.controllers.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.controllers.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.controllers.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.controllers.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.controllers.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}
