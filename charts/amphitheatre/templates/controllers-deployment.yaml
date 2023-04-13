@@ -31,3 +31,6 @@ spec:
           runAsNonRoot: true
         image: {{ include "amphitheatre.controllers.image" . }}
         imagePullPolicy: {{ .Values.controllers.pullPolicy }}
+        env:
+          - name: AMP_NAMESPACE
+            value: {{ .Release.Namespace | quote }}
