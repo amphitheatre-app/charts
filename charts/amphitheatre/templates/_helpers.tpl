@@ -168,6 +168,6 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- if .Values.mysql.enabled }}
     {{- printf "%s" (include "amphitheatre.mysql.fullname" .) -}}
 {{- else -}}
-    {{- printf "%s-external-db" .Chart.Name -}}
+    {{- printf "%s-external-db" (include "common.names.fullname" .) -}}
 {{- end -}}
 {{- end -}}
