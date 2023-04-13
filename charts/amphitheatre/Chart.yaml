@@ -27,6 +27,11 @@ dependencies:
   - name: amphitheatre-crds
     version: 0.1.5
     condition: crds.install
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    tags:
+      - bitnami-common
+    version: 2.x.x
   - name: kpack
     repository: https://charts.amphitheatre.app
     version: 0.1.0

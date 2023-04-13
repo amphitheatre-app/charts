@@ -1,36 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: amp-controllers
-  namespace: {{ .Release.Namespace | quote }}
+  name: {{ include "amphitheatre.controllers.fullname" . }}
   labels:
-    app.kubernetes.io/component: amp-controllers
+    {{- include "amphitheatre.controllers.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.controllers.autoscaling.enabled }}
   replicas: {{ .Values.controllers.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/component: amp-controllers
+      {{- include "amphitheatre.controllers.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.controllers.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app.kubernetes.io/component: amp-controllers
+        {{- include "amphitheatre.controllers.selectorLabels" . | nindent 8 }}
     spec:
-      {{- if .Values.controllers.pullSecrets }}
+      {{- with .Values.controllers.imagePullSecrets }}
       imagePullSecrets:
-      {{- range .Values.controllers.pullSecrets }}
-        - name: {{ . }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- end }}
+      serviceAccountName: {{ include "amphitheatre.controllers.serviceAccountName" . }}
       securityContext:
-        runAsNonRoot: true
-      nodeSelector:
-        kubernetes.io/os: linux
+        {{- toYaml .Values.controllers.podSecurityContext | nindent 8 }}
       containers:
-      - name: amp-controllers
-        securityContext:
-          runAsNonRoot: true
-        image: {{ include "amphitheatre.controllers.image" . }}
-        imagePullPolicy: {{ .Values.controllers.pullPolicy }}
-        env:
-          - name: AMP_NAMESPACE
-            value: {{ .Release.Namespace | quote }}
+        - name: {{ include "amphitheatre.controllers.name" . }}
+          securityContext:
+            {{- toYaml .Values.controllers.securityContext | nindent 12 }}
+          image: {{ include "amphitheatre.controllers.image" . }}
+          imagePullPolicy: {{ .Values.controllers.image.pullPolicy }}
+          env:
+            - name: AMP_NAMESPACE
+              value: {{ .Release.Namespace | quote }}
+            - name: AMP_SERVICE_ACCOUNT_NAME
+              value: {{ include "amphitheatre.controllers.serviceAccountName" . }}
+          resources:
+            {{- toYaml .Values.controllers.resources | nindent 12 }}
+      {{- with .Values.controllers.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.controllers.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.controllers.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
