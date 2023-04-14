@@ -47,9 +47,11 @@ spec:
                 secretKeyRef:
                   name: {{ include "amphitheatre.database.secretName" . }}
                   key: mysql-password
+            - name: AMP_PORT
+              value: {{ .Values.service.port }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
