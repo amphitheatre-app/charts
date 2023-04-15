@@ -48,7 +48,7 @@ spec:
                   name: {{ include "amphitheatre.database.secretName" . }}
                   key: mysql-password
             - name: AMP_PORT
-              value: {{ .Values.service.port }}
+              value: {{ .Values.service.port | quote }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
