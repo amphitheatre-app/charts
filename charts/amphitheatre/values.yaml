@@ -78,7 +78,7 @@ apiserver:
 ## @section Service parameters
 service:
   type: ClusterIP
-  port: 80
+  port: 8170
 
 ## @section Ingress parameters
 ingress:
