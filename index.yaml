@@ -3,6 +3,34 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-04-15T09:09:15.081941298Z"
+    dependencies:
+    - condition: crds.install
+      name: amphitheatre-crds
+      repository: ""
+      version: 0.1.5
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    - condition: kpack.enabled
+      name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.1.0
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.7.1
+    description: A Helm chart for Kubernetes
+    digest: 5a3043fd0f6a17dfe44b303318288655a09d611971ba8bdb248638953f68f070
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.4.25/amphitheatre-0.4.25.tgz
+    version: 0.4.25
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-04-15T08:54:14.329190978Z"
     dependencies:
     - condition: crds.install
@@ -806,4 +834,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-15T08:54:14.329751687Z"
+generated: "2023-04-15T09:09:15.082628807Z"
