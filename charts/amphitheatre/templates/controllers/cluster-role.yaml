@@ -8,9 +8,41 @@ rules:
   verbs: ["get", "list", "watch"]
 
 - apiGroups: [""]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: [""]
   resources: ["namespaces"]
-  verbs: ["get", "list", "watch"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["watch", "create", "update", "patch"]
+
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
 - apiGroups: ["amphitheatre.app"]
-  resources: ["actors", "playbooks"]
+  resources: ["actors", "actors/status", "actors/finalizers"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: ["amphitheatre.app"]
+  resources: ["playbooks", "playbooks/status", "playbooks/finalizers"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: ["events.k8s.io"]
+  resources: ["events"]
+  verbs: ["create"]
+
+- apiGroups: ["kpack.io"]
+  resources: ["images"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
