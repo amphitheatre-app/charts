@@ -4,7 +4,7 @@ metadata:
   name: kpack-controller-admin-binding
 subjects:
 - kind: ServiceAccount
-  name: controller
+  name: kpack-controller
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
@@ -17,7 +17,7 @@ metadata:
   name: kpack-controller-servicebindings-binding
 subjects:
 - kind: ServiceAccount
-  name: controller
+  name: kpack-controller
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
@@ -30,7 +30,7 @@ metadata:
   name: kpack-webhook-certs-mutatingwebhookconfiguration-admin-binding
 subjects:
 - kind: ServiceAccount
-  name: webhook
+  name: kpack-webhook
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole

@@ -18,7 +18,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       priorityClassName: kpack-control-plane
-      serviceAccountName: controller
+      serviceAccountName: kpack-controller
       nodeSelector:
         kubernetes.io/os: linux
       containers:

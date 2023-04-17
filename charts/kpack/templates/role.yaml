@@ -30,7 +30,7 @@ rules:
   resources:
   - secrets
   resourceNames:
-  - webhook-certs
+  - kpack-webhook-certs
   verbs:
   - update
 - apiGroups:

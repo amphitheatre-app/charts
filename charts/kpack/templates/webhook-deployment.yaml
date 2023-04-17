@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: kpack-webhook
-        role: webhook
+        role: kpack-webhook
         version: 0.9.1-rc.1
     spec:
       securityContext:
@@ -19,7 +19,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       priorityClassName: kpack-control-plane
-      serviceAccountName: webhook
+      serviceAccountName: kpack-webhook
       nodeSelector:
         kubernetes.io/os: linux
       containers:

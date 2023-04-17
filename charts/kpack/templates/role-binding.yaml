@@ -4,7 +4,7 @@ metadata:
   name: kpack-controller-local-config-binding
 subjects:
 - kind: ServiceAccount
-  name: controller
+  name: kpack-controller
 roleRef:
   kind: Role
   name: kpack-controller-local-config
@@ -16,7 +16,7 @@ metadata:
   name: kpack-webhook-certs-admin-binding
 subjects:
 - kind: ServiceAccount
-  name: webhook
+  name: kpack-webhook
 roleRef:
   kind: Role
   name: kpack-webhook-certs-admin

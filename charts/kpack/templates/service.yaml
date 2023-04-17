@@ -7,4 +7,4 @@ spec:
   - port: 443
     targetPort: 8443
   selector:
-    role: webhook
+    role: kpack-webhook
