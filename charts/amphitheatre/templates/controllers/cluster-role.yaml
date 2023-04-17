@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: amp-controllers
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list", "watch"]
+
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list", "watch"]
+
+- apiGroups: ["amphitheatre.app"]
+  resources: ["actors", "playbooks"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
