@@ -80,6 +80,16 @@ service:
   type: ClusterIP
   port: 8170
 
+## @section Gateway parameters
+gateway:
+  enabled: false
+  route:
+    hostnames:
+      - api.amphitheatre.local
+    paths:
+      - path: /
+        pathType: PathPrefix
+
 ## @section Ingress parameters
 ingress:
   enabled: false

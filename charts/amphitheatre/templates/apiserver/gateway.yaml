@@ -1,0 +1,48 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "amphitheatre.apiserver.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: envoy-gateway
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: {{ $svcPort }}
+
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: {{ $fullName }}
+spec:
+  parentRefs:
+    - name: envoy-gateway
+  hostnames:
+    {{- range .Values.gateway.route.hostnames }}
+    - {{ . | quote }}
+    {{- end }}
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: {{ $fullName }}
+          port: {{ $svcPort }}
+          weight: 1
+      matches:
+        {{- range .Values.gateway.route.paths }}
+        - path:
+            type: {{ .pathType }}
+            value: {{ .path }}
+        {{ - end }}
+{{- end }}
