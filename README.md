@@ -17,7 +17,7 @@ issues](https://img.shields.io/github/issues/amphitheatre-app/charts)](https://g
 ### Pre-requisites
 
 - Kubernetes 1.19+
-- Helm 3.2.0+
+- Helm 3.9.0+
 - PV provisioner support in the underlying infrastructure
 - ReadWriteMany volumes for deployment scaling
 
