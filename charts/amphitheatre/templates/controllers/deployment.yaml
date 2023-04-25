@@ -38,6 +38,10 @@ spec:
               value: {{ .Release.Namespace | quote }}
             - name: AMP_SERVICE_ACCOUNT_NAME
               value: {{ include "amphitheatre.controllers.serviceAccountName" . }}
+            {{- if .Values.controllers.debug }}
+            - name: RUST_LOG
+              value: debug
+            {{- end }}
           resources:
             {{- toYaml .Values.controllers.resources | nindent 12 }}
       {{- with .Values.controllers.nodeSelector }}

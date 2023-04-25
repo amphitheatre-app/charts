@@ -49,6 +49,10 @@ spec:
                   key: mysql-password
             - name: AMP_PORT
               value: {{ .Values.service.port | quote }}
+            {{- if .Values.apiserver.debug }}
+            - name: RUST_LOG
+              value: debug
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
