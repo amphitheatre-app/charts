@@ -44,5 +44,5 @@ spec:
         - path:
             type: {{ .pathType }}
             value: {{ .path }}
-        {{ - end }}
+        {{- end }}
 {{- end }}
