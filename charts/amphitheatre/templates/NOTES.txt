@@ -6,8 +6,14 @@
   {{- end }}
 {{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "amphitheatre.apiserver.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  NODE=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].metadata.name}")
+  NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "amphitheatre.apiserver.fullname" . }})
+  EXTERNAL_IP=$(kubectl get node $NODE --template='{{range .status.addresses}}{{if eq .type "ExternalIP"}}{{.address}}{{end}}{{end}}')
+  if [ -z "$EXTERNAL_IP" ]; then
+      NODE_IP=$(kubectl get node $NODE -o jsonpath="{.status.addresses[0].address}")
+  else
+      NODE_IP=$EXTERNAL_IP
+  fi
   echo http://$NODE_IP:$NODE_PORT
 {{- else if contains "LoadBalancer" .Values.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
