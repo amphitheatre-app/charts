@@ -13,7 +13,4 @@ kubectl delete ns amp-system
 sleep 30
 
 echo "3/4 Install new release"
-helm install amp . --create-namespace --namespace amp-system \
-    --set service.type=NodePort \
-    --set apiserver.debug=true \
-    --set controllers.debug=true
+helm install amp . --create-namespace --namespace amp-system

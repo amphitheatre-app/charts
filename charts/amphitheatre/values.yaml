@@ -6,7 +6,7 @@ apiserver:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-apiserver
-    tag: v23-04-25
+    tag: v23-04-28
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -73,11 +73,11 @@ apiserver:
   affinity: {}
 
   ## Enable debug mode
-  debug: false
+  debug: true
 
 ## @section Service parameters
 service:
-  type: ClusterIP
+  type: NodePort
   port: 8170
 
 ## @section Gateway parameters
@@ -152,7 +152,7 @@ controllers:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-controllers
-    tag: v23-04-25
+    tag: v23-04-28
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -219,7 +219,7 @@ controllers:
   affinity: {}
 
   ## Enable debug mode
-  debug: false
+  debug: true
 
 ## @section Amphitheatre CRDs Parameters
 crds:
