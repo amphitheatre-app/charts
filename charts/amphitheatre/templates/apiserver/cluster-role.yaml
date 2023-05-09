@@ -4,5 +4,9 @@ metadata:
   name: amp-apiserver
 rules:
 - apiGroups: ["amphitheatre.app"]
+  resources: ["actors", "actors/status"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: ["amphitheatre.app"]
   resources: ["playbooks", "playbooks/status"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

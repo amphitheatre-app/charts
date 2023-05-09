@@ -34,19 +34,6 @@ spec:
           image: {{ include "amphitheatre.apiserver.image" . }}
           imagePullPolicy: {{ .Values.apiserver.image.pullPolicy }}
           env:
-            - name: AMP_DATABASE_HOST
-              value: {{ include "amphitheatre.database.host" . | quote }}
-            - name: AMP_DATABASE_PORT
-              value: {{ include "amphitheatre.database.port" . | quote }}
-            - name: AMP_DATABASE_NAME
-              value: {{ include "amphitheatre.database.name" . | quote }}
-            - name: AMP_DATABASE_USERNAME
-              value: {{ include "amphitheatre.database.username" . | quote }}
-            - name: AMP_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "amphitheatre.database.secretName" . }}
-                  key: mysql-password
             - name: AMP_PORT
               value: {{ .Values.service.port | quote }}
             {{- if .Values.apiserver.debug }}

@@ -6,7 +6,7 @@ apiserver:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-apiserver
-    tag: v23-04-28
+    tag: v0.1.0-nightly-20230508-2
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -107,43 +107,6 @@ ingress:
   #    hosts:
   #      - api.amphitheatre.local
 
-## @section Database parameters
-
-## MySQL chart configuration
-## ref: https://github.com/bitnami/charts/blob/main/bitnami/mysql/values.yaml
-mysql:
-  ## @param mysql.enabled Deploy a MySQL server to satisfy the application database requirement
-  ## To use an external database set this to false and configure the `externalDatabase.*` parameters
-  enabled: true
-
-  ## @param mysql.auth.rootPassword MySQL root password
-  ## @param mysql.auth.database MySQL custom database
-  ## @param mysql.auth.username MySQL custom user name
-  ## @param mysql.auth.password MySQL custom user password
-  auth:
-    rootPassword: ""
-    database: amphitheatre
-    username: amphitheatre
-    password: ""
-
-## External Database configuration
-## All of these values are only used if `mysql.enabled=false`
-externalDatabase:
-  ## @param externalDatabase.host External Database server host
-  host: localhost
-
-  ## @param externalDatabase.port External Database server port
-  port: 3306
-
-  ## @param externalDatabase.username External Database username
-  username: amphitheatre
-
-  ## @param externalDatabase.password External Database database password
-  password: ""
-
-  ## @param externalDatabase.database ExternalDatabase database name
-  database: amphitheatre
-
 ## @section Amphitheatre Controllers parameters
 controllers:
   nameOverride: ""
@@ -152,7 +115,7 @@ controllers:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-controllers
-    tag: v23-04-28
+    tag: v0.1.0-nightly-20230508-2
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
