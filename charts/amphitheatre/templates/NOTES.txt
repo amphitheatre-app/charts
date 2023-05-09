@@ -8,7 +8,7 @@
 {{- else if contains "NodePort" .Values.service.type }}
   NODE=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].metadata.name}")
   NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "amphitheatre.apiserver.fullname" . }})
-  EXTERNAL_IP=$(kubectl get node $NODE --template='{{range .status.addresses}}{{if eq .type "ExternalIP"}}{{.address}}{{end}}{{end}}')
+  EXTERNAL_IP=$(kubectl get node $NODE -o jsonpath='{.status.addresses[?(@.type=="ExternalIP")].address}')
   if [ -z "$EXTERNAL_IP" ]; then
       NODE_IP=$(kubectl get node $NODE -o jsonpath="{.status.addresses[0].address}")
   else
