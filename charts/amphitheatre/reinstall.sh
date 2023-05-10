@@ -10,7 +10,7 @@ helm dependency build
 echo "2/4 Uninstall and delete Helm release if it already exists"
 helm uninstall amp --namespace amp-system
 kubectl delete ns amp-system
-sleep 30
+sleep 10
 
 echo "3/4 Install new release"
 helm install amp . --create-namespace --namespace amp-system
