@@ -6,7 +6,7 @@ apiserver:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-apiserver
-    tag: v0.1.0-nightly-20230509
+    tag: v0.1.0-nightly-20230517
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -115,7 +115,7 @@ controllers:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-controllers
-    tag: v0.1.0-nightly-20230509
+    tag: v0.1.0-nightly-20230517
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
