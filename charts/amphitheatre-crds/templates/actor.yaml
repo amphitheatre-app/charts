@@ -24,6 +24,17 @@ spec:
                 description: Describes how images are built.
                 nullable: true
                 properties:
+                  arguments:
+                    description: Arguments, in the key=value form, passed to the build.
+                    items:
+                      items:
+                      - type: string
+                      - type: string
+                      maxItems: 2
+                      minItems: 2
+                      type: array
+                    nullable: true
+                    type: array
                   builder:
                     description: Builds images using Cloud Native Buildpacks, which Cluster Builder image used.
                     nullable: true
@@ -36,7 +47,7 @@ spec:
                     description: Builds images using kaniko. Locates the Dockerfile relative to workspace.
                     nullable: true
                     type: string
-                  env:
+                  environments:
                     additionalProperties:
                       type: string
                     description: Environment variables, in the key=value form, passed to the build.
