@@ -29,14 +29,9 @@ spec:
                       nullable: true
                       properties:
                         arguments:
-                          description: Arguments, in the key=value form, passed to the build.
+                          description: Arguments passed to the build.
                           items:
-                            items:
-                            - type: string
-                            - type: string
-                            maxItems: 2
-                            minItems: 2
-                            type: array
+                            type: string
                           nullable: true
                           type: array
                         builder:
