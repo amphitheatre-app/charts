@@ -28,7 +28,7 @@ spec:
                       description: Describes how images are built.
                       nullable: true
                       properties:
-                        arguments:
+                        args:
                           description: Arguments passed to the build.
                           items:
                             type: string
@@ -46,7 +46,7 @@ spec:
                           description: Builds images using kaniko. Locates the Dockerfile relative to workspace.
                           nullable: true
                           type: string
-                        environments:
+                        env:
                           additionalProperties:
                             type: string
                           description: Environment variables, in the key=value form, passed to the build.
@@ -73,7 +73,7 @@ spec:
                       description: The description of the actor.
                       nullable: true
                       type: string
-                    environments:
+                    env:
                       additionalProperties:
                         type: string
                       description: 'Defines environment variables set in the container. Any boolean values: true, false, yes, no, SHOULD be enclosed in quotes to ensure they are not converted to True or False by the YAML parser.'
@@ -87,29 +87,43 @@ spec:
                       type: string
                     partners:
                       additionalProperties:
-                        description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
+                        oneOf:
+                        - required:
+                          - git
+                        - required:
+                          - manifest
+                        - required:
+                          - name
                         properties:
-                          branch:
-                            description: Git branch the partner should be cloned from. eg. master or main
-                            nullable: true
+                          git:
+                            description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
+                            properties:
+                              branch:
+                                description: Git branch the partner should be cloned from. eg. master or main
+                                nullable: true
+                                type: string
+                              path:
+                                description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
+                                nullable: true
+                                type: string
+                              repo:
+                                description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                                type: string
+                              rev:
+                                description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                                nullable: true
+                                type: string
+                              tag:
+                                description: Git tag the partner should be cloned from. eg. v1.0
+                                nullable: true
+                                type: string
+                            required:
+                            - repo
+                            type: object
+                          manifest:
                             type: string
-                          path:
-                            description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
-                            nullable: true
+                          name:
                             type: string
-                          repo:
-                            description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
-                            type: string
-                          rev:
-                            description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
-                            nullable: true
-                            type: string
-                          tag:
-                            description: Git tag the partner should be cloned from. eg. v1.0
-                            nullable: true
-                            type: string
-                        required:
-                        - repo
                         type: object
                       description: Depend on other partners from other repositories, or subdirectories on your local file system.
                       nullable: true
@@ -193,28 +207,43 @@ spec:
                 type: string
               preface:
                 description: The starting character for this playbook
+                oneOf:
+                - required:
+                  - git
+                - required:
+                  - manifest
+                - required:
+                  - name
                 properties:
-                  branch:
-                    description: Git branch the partner should be cloned from. eg. master or main
-                    nullable: true
+                  git:
+                    description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
+                    properties:
+                      branch:
+                        description: Git branch the partner should be cloned from. eg. master or main
+                        nullable: true
+                        type: string
+                      path:
+                        description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
+                        nullable: true
+                        type: string
+                      repo:
+                        description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                        type: string
+                      rev:
+                        description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                        nullable: true
+                        type: string
+                      tag:
+                        description: Git tag the partner should be cloned from. eg. v1.0
+                        nullable: true
+                        type: string
+                    required:
+                    - repo
+                    type: object
+                  manifest:
                     type: string
-                  path:
-                    description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
-                    nullable: true
+                  name:
                     type: string
-                  repo:
-                    description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
-                    type: string
-                  rev:
-                    description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
-                    nullable: true
-                    type: string
-                  tag:
-                    description: Git tag the partner should be cloned from. eg. v1.0
-                    nullable: true
-                    type: string
-                required:
-                - repo
                 type: object
               sync:
                 description: Global sync mode, if enabled, pulls the latest code from source version control in real time via Webhook, etc. and then rebuilds and deploys it
