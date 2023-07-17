@@ -116,3 +116,17 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- default "default" .Values.controllers.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Create a default fully qualified app name for NATS dependency.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "amphitheatre.nats.fullname" -}}
+{{- include "common.names.dependency.fullname" (dict "chartName" "nats" "chartValues" .Values.nats "context" $) -}}
+{{- end -}}
+
+{{/* Return the NATS URL */}}
+{{- define "amphitheatre.nats.url" -}}
+{{- printf "nats://%s.%s.svc:4222" (include "amphitheatre.nats.fullname" .) .Release.Namespace -}}
+{{- end -}}

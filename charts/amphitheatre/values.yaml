@@ -193,3 +193,13 @@ crds:
 kpack:
   # Switch to enable or disable the kpack helm chart
   enabled: true
+
+## @section NATS Parameters
+nats:
+  nats:
+    jetstream:
+      enabled: true
+  cluster:
+    enabled: true
+    # disable cluster advertisements when running behind a load balancer
+    noAdvertise: false

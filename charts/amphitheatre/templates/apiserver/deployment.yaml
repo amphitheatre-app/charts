@@ -36,6 +36,8 @@ spec:
           env:
             - name: AMP_PORT
               value: {{ .Values.service.port | quote }}
+            - name: AMP_NATS_URL
+              value: {{ include "amphitheatre.nats.url" . | quote }}
             {{- if .Values.apiserver.debug }}
             - name: RUST_LOG
               value: debug
