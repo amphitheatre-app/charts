@@ -42,7 +42,3 @@ rules:
 - apiGroups: ["events.k8s.io"]
   resources: ["events"]
   verbs: ["create"]
-
-- apiGroups: ["kpack.io"]
-  resources: ["images"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
