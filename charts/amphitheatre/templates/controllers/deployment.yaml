@@ -38,6 +38,8 @@ spec:
               value: {{ .Release.Namespace | quote }}
             - name: AMP_SERVICE_ACCOUNT_NAME
               value: {{ include "amphitheatre.controllers.serviceAccountName" . }}
+            - name: AMP_NATS_URL
+              value: {{ include "amphitheatre.nats.url" . | quote }}
             {{- if .Values.controllers.debug }}
             - name: RUST_LOG
               value: debug
