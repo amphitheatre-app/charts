@@ -42,7 +42,7 @@ spec:
               value: {{ include "amphitheatre.nats.url" . | quote }}
             {{- if .Values.controllers.debug }}
             - name: RUST_LOG
-              value: debug
+              value: amp=debug
             {{- end }}
           resources:
             {{- toYaml .Values.controllers.resources | nindent 12 }}

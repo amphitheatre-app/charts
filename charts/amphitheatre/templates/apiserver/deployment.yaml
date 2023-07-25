@@ -40,7 +40,7 @@ spec:
               value: {{ include "amphitheatre.nats.url" . | quote }}
             {{- if .Values.apiserver.debug }}
             - name: RUST_LOG
-              value: debug
+              value: amp=debug
             {{- end }}
           ports:
             - name: http
