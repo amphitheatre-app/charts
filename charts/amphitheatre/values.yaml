@@ -79,6 +79,7 @@ apiserver:
 service:
   type: NodePort
   port: 8170
+  nodePort: 31700
 
 ## @section Gateway parameters
 gateway:
