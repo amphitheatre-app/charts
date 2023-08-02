@@ -4,14 +4,22 @@ metadata:
   name: {{ include "amphitheatre.apiserver.fullname" . }}
   labels:
     {{- include "amphitheatre.apiserver.labels" . | nindent 4 }}
+  {{- with .Values.service.labels -}}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - name: http
-      protocol: TCP
       port: {{ .Values.service.port }}
+      protocol: TCP
       targetPort: http
+      {{- if .Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
-
+      {{- end }}
   selector:
     {{- include "amphitheatre.apiserver.selectorLabels" . | nindent 4 }}

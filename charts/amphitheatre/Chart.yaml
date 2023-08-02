@@ -15,13 +15,13 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.7.4
+version: 0.7.7
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "0.4.7"
+appVersion: "v0.4.10"
 
 dependencies:
   - name: amphitheatre-crds
@@ -37,6 +37,10 @@ dependencies:
     repository: oci://docker.io/envoyproxy
     version: v0.0.0-latest
     condition: gateway.enabled
+  - name: metrics-server
+    repository: https://kubernetes-sigs.github.io/metrics-server/
+    version: 3.10.0
+    condition: metrics-server.enabled
   - name: nats
     repository: https://nats-io.github.io/k8s/helm/charts/
     version: 0.18.0

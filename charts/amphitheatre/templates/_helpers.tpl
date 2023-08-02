@@ -34,7 +34,7 @@ If release name contains chart name it will be used as a full name.
 
 {{/* Return the proper apiserver image name */}}
 {{- define "amphitheatre.apiserver.image" -}}
-{{- printf "%s/%s:%s" .Values.apiserver.image.registry .Values.apiserver.image.repository .Values.apiserver.image.tag }}
+{{- printf "%s/%s:%s" .Values.apiserver.image.registry .Values.apiserver.image.repository .Chart.AppVersion }}
 {{- end -}}
 
 {{/* Apiserver labels */}}
@@ -89,7 +89,7 @@ If release name contains chart name it will be used as a full name.
 
 {{/* Return the proper controllers image name */}}
 {{- define "amphitheatre.controllers.image" -}}
-{{- printf "%s/%s:%s" .Values.controllers.image.registry .Values.controllers.image.repository .Values.controllers.image.tag }}
+{{- printf "%s/%s:%s" .Values.controllers.image.registry .Values.controllers.image.repository .Chart.AppVersion }}
 {{- end -}}
 
 {{/* Controllers labels */}}

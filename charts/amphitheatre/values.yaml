@@ -6,7 +6,6 @@ apiserver:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-apiserver
-    tag: v0.4.7
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -78,8 +77,15 @@ apiserver:
 ## @section Service parameters
 service:
   type: NodePort
+
+  ## @param port Port to expose on the service, and also used for the container port.
   port: 8170
+
+  ## @param nodePort Only used if service type is NodePort or LoadBalancer
   nodePort: 31700
+
+  annotations: {}
+  labels: {}
 
 ## @section Gateway parameters
 gateway:
@@ -116,7 +122,6 @@ controllers:
   image:
     registry: ghcr.io
     repository: amphitheatre-app/amp-controllers
-    tag: v0.4.7
 
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -199,3 +204,11 @@ nats:
     enabled: true
     # disable cluster advertisements when running behind a load balancer
     noAdvertise: false
+
+## @section Metrics Server Parameters
+metrics-server:
+  enabled: true
+  apiService:
+    insecureSkipTLSVerify: true
+  args:
+    - --kubelet-insecure-tls
