@@ -57,8 +57,8 @@ The following table lists the configurable parameters of the Amphitheatre chart 
 
 | Parameter                | Description                                                                                               | Default               |
 |--------------------------|-----------------------------------------------------------------------------------------------------------|-----------------------|
-| apiserver.nameOverride    | String to partially override nsq.fullname                                                                 |                       |
-| apiserver.fullnameOverride| String to partially override nsq.fullname                                                                 |                       |
+| apiserver.nameOverride    | String to partially override apiserver.fullname                                                                 |                       |
+| apiserver.fullnameOverride| String to partially override apiserver.fullname                                                                 |                       |
 | apiserver.image.registry  | Image registry for the Amphitheatre APIServer                                                             | `ghcr.io`             |
 | apiserver.image.repository| Image repository for the Amphitheatre APIServer                                                           | `amphitheatre-app/amp-apiserver` |
 | apiserver.image.pullPolicy| Image pull policy for the Amphitheatre APIServer                                                           | `IfNotPresent`        |
@@ -111,8 +111,8 @@ The following table lists the configurable parameters of the Amphitheatre chart 
 
 | Parameter                | Description                                                                                               | Default               |
 |--------------------------|-----------------------------------------------------------------------------------------------------------|-----------------------|
-| controllers.nameOverride    | String to partially override nsq.fullname                                                                 |                       |
-| controllers.fullnameOverride| String to partially override nsq.fullname                                                                 |                       |
+| controllers.nameOverride    | String to partially override controllers.fullname                                                                 |                       |
+| controllers.fullnameOverride| String to partially override controllers.fullname                                                                 |                       |
 | controllers.image.registry  | Image registry for the Amphitheatre Controllers                                                             | `ghcr.io`             |
 | controllers.image.repository| Image repository for the Amphitheatre Controllers                                                           | `amphitheatre-app/amp-controllers` |
 | controllers.image.pullPolicy| Image pull policy for the Amphitheatre Controllers                                                           | `IfNotPresent`        |
