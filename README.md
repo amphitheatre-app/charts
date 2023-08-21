@@ -34,7 +34,7 @@ amphitheatre` to see the charts.
 ### To install the chart with the release name `amp`:
 
 ```sh
-  helm install amp amphitheatre/amphitheatre --create-namespace --namespace=amp-system
+ helm upgrade --install amp amphitheatre/amphitheatre --create-namespace --namespace=amp-system
 ```
 
 The command deploys Amphitheatre API Server on the Kubernetes cluster in the
@@ -48,6 +48,104 @@ default configuration.
 
 The command removes all the Kubernetes components associated with the chart and
 deletes the release.
+
+## Configuration
+
+The following table lists the configurable parameters of the Amphitheatre chart and their default values.
+
+### Amphitheatre APIServer parameters
+
+| Parameter                | Description                                                                                               | Default               |
+|--------------------------|-----------------------------------------------------------------------------------------------------------|-----------------------|
+| apiserver.nameOverride    | String to partially override nsq.fullname                                                                 |                       |
+| apiserver.fullnameOverride| String to partially override nsq.fullname                                                                 |                       |
+| apiserver.image.registry  | Image registry for the Amphitheatre APIServer                                                             | `ghcr.io`             |
+| apiserver.image.repository| Image repository for the Amphitheatre APIServer                                                           | `amphitheatre-app/amp-apiserver` |
+| apiserver.image.pullPolicy| Image pull policy for the Amphitheatre APIServer                                                           | `IfNotPresent`        |
+| apiserver.imagePullSecrets| Array of imagePullSecrets for the Amphitheatre APIServer                                                    | `[]`                  |
+| apiserver.replicaCount    | Number of replicas for the Amphitheatre APIServer deployment                                              | `1`                   |
+| apiserver.serviceAccount.create| Specifies whether a service account should be created for the APIServer                               | `true`                |
+| apiserver.serviceAccount.annotations| Annotations to add to the APIServer service account                                                      | `{}`                  |
+| apiserver.serviceAccount.name| Name of the service account to use for the APIServer, generated using the fullname template if not set  | `amp-apiserver`       |
+| apiserver.podAnnotations  | Annotations to add to the APIServer pods                                                                  | `{}`                  |
+| apiserver.podSecurityContext| Security context for the APIServer pods                                                                 | `{}`                  |
+| apiserver.securityContext.runAsNonRoot| Run the APIServer pods as a non-root user                                                             | `true`                |
+| apiserver.resources       | Resource requests and limits for the APIServer pods                                                      | `{}`                  |
+| apiserver.autoscaling.enabled| Enable autoscaling for the APIServer deployment                                                        | `false`               |
+| apiserver.autoscaling.minReplicas| Minimum number of replicas when autoscaling is enabled                                                | `1`                   |
+| apiserver.autoscaling.maxReplicas| Maximum number of replicas when autoscaling is enabled                                                | `100`                 |
+| apiserver.autoscaling.targetCPUUtilizationPercentage| Target CPU utilization percentage for autoscaling                                    | `80`                  |
+| apiserver.nodeSelector    | Node selector for the APIServer pods                                                                     | `kubernetes.io/os: linux` |
+| apiserver.tolerations     | Tolerations for the APIServer pods                                                                        | `[]`                  |
+| apiserver.affinity        | Affinity settings for the APIServer pods                                                                  | `{}`                  |
+| apiserver.debug           | Enable debug mode for the APIServer                                                                       | `true`                |
+
+### Service parameters
+
+| Parameter           | Description                               | Default      |
+|---------------------|-------------------------------------------|--------------|
+| service.type        | Type of service                           | `NodePort`   |
+| service.port        | Port to expose on the service             | `8170`       |
+| service.nodePort    | NodePort to use (only for NodePort type)   | `31700`      |
+| service.annotations | Annotations for the service                | `{}`         |
+| service.labels      | Labels for the service                    | `{}`         |
+
+### Gateway parameters
+
+| Parameter         | Description                               | Default                |
+|-------------------|-------------------------------------------|------------------------|
+| gateway.enabled   | Enable the Gateway                        | `false`                |
+| gateway.host      | Host for the Gateway                      | `api.amphitheatre.local` |
+
+### Ingress parameters
+
+| Parameter         | Description                               | Default                |
+|-------------------|-------------------------------------------|------------------------|
+| ingress.enabled   | Enable Ingress                            | `false`                |
+| ingress.className | Ingress class name                        | `""`                   |
+| ingress.annotations| Annotations for the Ingress                | `{}`                   |
+| ingress.host      | Host for the Ingress                      | `api.amphitheatre.local` |
+| ingress.tls       | TLS configuration for the Ingress         | `[]`                   |
+
+### Amphitheatre Controllers parameters
+
+| Parameter                | Description                                                                                               | Default               |
+|--------------------------|-----------------------------------------------------------------------------------------------------------|-----------------------|
+| controllers.nameOverride    | String to partially override nsq.fullname                                                                 |                       |
+| controllers.fullnameOverride| String to partially override nsq.fullname                                                                 |                       |
+| controllers.image.registry  | Image registry for the Amphitheatre Controllers                                                             | `ghcr.io`             |
+| controllers.image.repository| Image repository for the Amphitheatre Controllers                                                           | `amphitheatre-app/amp-controllers` |
+| controllers.image.pullPolicy| Image pull policy for the Amphitheatre Controllers                                                           | `IfNotPresent`        |
+| controllers.imagePullSecrets| Array of imagePullSecrets for the Amphitheatre Controllers                                                    | `[]`                  |
+| controllers.replicaCount    | Number of replicas for the Amphitheatre Controllers deployment                                              | `1`                   |
+| controllers.serviceAccount.create| Specifies whether a service account should be created for the Controllers                               | `true`                |
+| controllers.serviceAccount.annotations| Annotations to add to the Controllers service account                                                      | `{}`                  |
+| controllers.serviceAccount.name| Name of the service account to use for the Controllers, generated using the fullname template if not set  | `amp-controllers`     |
+| controllers.podAnnotations  | Annotations to add to the Controllers pods                                                                  | `{}`                  |
+| controllers.podSecurityContext| Security context for the Controllers pods                                                                 | `{}`                  |
+| controllers.securityContext.runAsNonRoot| Run the Controllers pods as a non-root user                                                             | `true`                |
+| controllers.resources       | Resource requests and limits for the Controllers pods                                                      | `{}`                  |
+| controllers.autoscaling.enabled| Enable autoscaling for the Controllers deployment                                                        | `false`               |
+| controllers.autoscaling.minReplicas| Minimum number of replicas when autoscaling is enabled                                                | `1`                   |
+| controllers.autoscaling.maxReplicas| Maximum number of replicas when autoscaling is enabled                                                | `100`                 |
+| controllers.autoscaling.targetCPUUtilizationPercentage| Target CPU utilization percentage for autoscaling                                    | `80`                  |
+| controllers.nodeSelector    | Node selector for the Controllers pods                                                                     | `kubernetes.io/os: linux` |
+| controllers.tolerations     | Tolerations for the Controllers pods                                                                        | `[]`                  |
+| controllers.affinity        | Affinity settings for the Controllers pods                                                                  | `{}`                  |
+| controllers.debug           | Enable debug mode for the Controllers                                                                       | `true`                |
+
+### Amphitheatre CRDs Parameters
+
+| Parameter           | Description                               | Default      |
+|---------------------|-------------------------------------------|--------------|
+| crds.install        | Install or uninstall the amphitheatre-crds helm chart | `true` |
+
+### NATS Parameters
+
+| Parameter           | Description                               | Default      |
+|---------------------|-------------------------------------------|--------------|
+| nats.nats.jetstream.enabled | Enable NATS JetStream               | `true`       |
+| nats.cluster.enabled       | Enable NATS Cluster                  | `true
 
 ## Documentation
 
