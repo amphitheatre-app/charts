@@ -20,30 +20,50 @@ spec:
         properties:
           spec:
             properties:
-              actors:
-                description: All the actors involved in this playbook
+              characters:
+                description: All the characters involved in this playbook
                 items:
                   properties:
                     build:
                       description: Describes how images are built.
                       nullable: true
+                      oneOf:
+                      - required:
+                        - Dockerfile
+                      - required:
+                        - Buildpacks
                       properties:
+                        Buildpacks:
+                          description: The configuration for building an image using Cloud Native Buildpacks.
+                          properties:
+                            builder:
+                              description: Builds images using Cloud Native Buildpacks Builder image (default "cnbs/sample-builder:jammy")
+                              nullable: true
+                              type: string
+                            buildpacks:
+                              description: Buildpacks to use.
+                              items:
+                                type: string
+                              nullable: true
+                              type: array
+                          type: object
+                        Dockerfile:
+                          description: The configuration for building an image using a Dockerfile.
+                          properties:
+                            dockerfile:
+                              description: Locates the Dockerfile relative to workspace.
+                              type: string
+                          required:
+                          - dockerfile
+                          type: object
                         args:
                           description: Arguments passed to the build.
                           items:
                             type: string
                           nullable: true
                           type: array
-                        builder:
-                          description: Builds images using Cloud Native Buildpacks, which Cluster Builder image used.
-                          nullable: true
-                          type: string
                         context:
                           description: Directory containing the artifact's sources.
-                          nullable: true
-                          type: string
-                        dockerfile:
-                          description: Builds images using kaniko. Locates the Dockerfile relative to workspace.
                           nullable: true
                           type: string
                         env:
@@ -65,37 +85,168 @@ spec:
                           nullable: true
                           type: array
                       type: object
-                    command:
-                      description: overrides the default command declared by the container image (i.e. by Dockerfile’s CMD)
+                    deploy:
+                      description: Describes how images are deploy.
                       nullable: true
-                      type: string
-                    description:
-                      description: The description of the actor.
-                      nullable: true
-                      type: string
-                    env:
-                      additionalProperties:
-                        type: string
-                      description: 'Defines environment variables set in the container. Any boolean values: true, false, yes, no, SHOULD be enclosed in quotes to ensure they are not converted to True or False by the YAML parser.'
-                      nullable: true
+                      properties:
+                        args:
+                          description: Arguments passed to the container command.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
+                        command:
+                          description: overrides the default command declared by the container image (i.e. by Dockerfile’s CMD)
+                          nullable: true
+                          type: string
+                        env:
+                          additionalProperties:
+                            type: string
+                          description: 'Defines environment variables set in the container. Any boolean values: true, false, yes, no, SHOULD be enclosed in quotes to ensure they are not converted to True or False by the YAML parser.'
+                          nullable: true
+                          type: object
+                        image:
+                          description: |-
+                            Specify the external image to be launched when it’s a reference kind of manifest. Or by default, leave it empty and Amphitheatre will automatically create it based on the current registry and name.
+
+                            The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].
+                          nullable: true
+                          type: string
+                        services:
+                          description: Defines the behavior of a service
+                          items:
+                            description: Defines the behavior of a service
+                            properties:
+                              kind:
+                                description: Type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
+                                nullable: true
+                                type: string
+                              ports:
+                                description: The list of ports that are exposed by this service.
+                                items:
+                                  description: List of ports to expose from the container.
+                                  properties:
+                                    expose:
+                                      description: Exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
+                                      nullable: true
+                                      type: boolean
+                                    port:
+                                      description: The port that will be exposed by this service.
+                                      format: int32
+                                      type: integer
+                                    protocol:
+                                      description: The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
+                                      nullable: true
+                                      type: string
+                                  required:
+                                  - port
+                                  type: object
+                                type: array
+                            required:
+                            - ports
+                            type: object
+                          nullable: true
+                          type: array
                       type: object
-                    image:
-                      description: 'Specifies the image to launch the container. The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].'
-                      type: string
-                    name:
-                      description: The name of the actor.
-                      type: string
+                    meta:
+                      description: Contains all the information about a character.
+                      properties:
+                        authors:
+                          description: The authors of the character.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
+                        categories:
+                          description: Categories of the character.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
+                        description:
+                          description: A description of the character.
+                          nullable: true
+                          type: string
+                        documentation:
+                          description: URL of the character documentation.
+                          nullable: true
+                          type: string
+                        homepage:
+                          description: URL of the character homepage.
+                          nullable: true
+                          type: string
+                        keywords:
+                          description: Keywords for the character.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
+                        license:
+                          description: The character license.
+                          nullable: true
+                          type: string
+                        license_file:
+                          description: Path to the text of the license.
+                          nullable: true
+                          type: string
+                        name:
+                          description: The name of the character.
+                          type: string
+                        publish:
+                          description: Can be used to prevent publishing the character.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
+                        readme:
+                          description: Path to the character's README file.
+                          nullable: true
+                          type: string
+                        repository:
+                          description: URL of the character source repository. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                          type: string
+                        version:
+                          description: The version of the character.
+                          nullable: true
+                          type: string
+                      required:
+                      - name
+                      - repository
+                      type: object
                     partners:
                       additionalProperties:
+                        description: Specify Support for OpenAPI, it does not untagged. Your character can depend on other characters from Registry or other registries, git repositories, or subdirectories of project.
                         oneOf:
                         - required:
-                          - git
+                          - registry
                         - required:
-                          - manifest
+                          - repository
                         - required:
-                          - name
+                          - local
                         properties:
-                          git:
+                          local:
+                            description: A partner that pulls a character from a local path.
+                            properties:
+                              path:
+                                description: The path to the character.
+                                type: string
+                            required:
+                            - path
+                            type: object
+                          registry:
+                            description: A partner that pulls a character from a registry.
+                            properties:
+                              registry:
+                                description: The registry to pull the character from. Defaults to Catalog.
+                                nullable: true
+                                type: string
+                              version:
+                                description: The version of the character to pull.
+                                type: string
+                            required:
+                            - version
+                            type: object
+                          repository:
                             description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
                             properties:
                               branch:
@@ -120,103 +271,303 @@ spec:
                             required:
                             - repo
                             type: object
-                          manifest:
-                            type: string
-                          name:
-                            type: string
                         type: object
                       description: Depend on other partners from other repositories, or subdirectories on your local file system.
                       nullable: true
                       type: object
-                    services:
-                      description: Defines the behavior of a service
-                      items:
-                        description: Defines the behavior of a service
-                        properties:
-                          kind:
-                            description: Type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
-                            nullable: true
-                            type: string
-                          ports:
-                            description: The list of ports that are exposed by this service.
-                            items:
-                              description: List of ports to expose from the container.
-                              properties:
-                                expose:
-                                  description: Exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
-                                  nullable: true
-                                  type: boolean
-                                port:
-                                  description: The port that will be exposed by this service.
-                                  format: int32
-                                  type: integer
-                                protocol:
-                                  description: The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
-                                  nullable: true
-                                  type: string
-                              required:
-                              - port
-                              type: object
-                            type: array
-                        required:
-                        - ports
-                        type: object
-                      nullable: true
-                      type: array
-                    source:
-                      description: The source of the actor.
-                      properties:
-                        branch:
-                          description: Git branch the partner should be cloned from. eg. master or main
-                          nullable: true
-                          type: string
-                        path:
-                          description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
-                          nullable: true
-                          type: string
-                        repo:
-                          description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
-                          type: string
-                        rev:
-                          description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
-                          nullable: true
-                          type: string
-                        tag:
-                          description: Git tag the partner should be cloned from. eg. v1.0
-                          nullable: true
-                          type: string
-                      required:
-                      - repo
-                      type: object
-                    sync:
-                      description: sync mode, if enabled, pulls the latest code from source version control in real time via Webhook, etc. and then rebuilds and deploys it
-                      nullable: true
-                      type: boolean
                   required:
-                  - image
-                  - name
-                  - source
+                  - meta
                   type: object
                 nullable: true
                 type: array
               description:
                 description: The description of the playbook
+                nullable: true
                 type: string
               namespace:
                 description: Namespace for its managed resources and Actor deployment instances
                 type: string
               preface:
                 description: The starting character for this playbook
-                oneOf:
-                - required:
-                  - git
-                - required:
-                  - manifest
-                - required:
-                  - name
                 properties:
-                  git:
-                    description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
+                  manifest:
+                    description: The preface from manifest.
+                    nullable: true
+                    properties:
+                      build:
+                        description: Describes how images are built.
+                        nullable: true
+                        oneOf:
+                        - required:
+                          - Dockerfile
+                        - required:
+                          - Buildpacks
+                        properties:
+                          Buildpacks:
+                            description: The configuration for building an image using Cloud Native Buildpacks.
+                            properties:
+                              builder:
+                                description: Builds images using Cloud Native Buildpacks Builder image (default "cnbs/sample-builder:jammy")
+                                nullable: true
+                                type: string
+                              buildpacks:
+                                description: Buildpacks to use.
+                                items:
+                                  type: string
+                                nullable: true
+                                type: array
+                            type: object
+                          Dockerfile:
+                            description: The configuration for building an image using a Dockerfile.
+                            properties:
+                              dockerfile:
+                                description: Locates the Dockerfile relative to workspace.
+                                type: string
+                            required:
+                            - dockerfile
+                            type: object
+                          args:
+                            description: Arguments passed to the build.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          context:
+                            description: Directory containing the artifact's sources.
+                            nullable: true
+                            type: string
+                          env:
+                            additionalProperties:
+                              type: string
+                            description: Environment variables, in the key=value form, passed to the build.
+                            nullable: true
+                            type: object
+                          exclude:
+                            description: Files to exclude when building.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          include:
+                            description: Files to include when building.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                        type: object
+                      deploy:
+                        description: Describes how images are deploy.
+                        nullable: true
+                        properties:
+                          args:
+                            description: Arguments passed to the container command.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          command:
+                            description: overrides the default command declared by the container image (i.e. by Dockerfile’s CMD)
+                            nullable: true
+                            type: string
+                          env:
+                            additionalProperties:
+                              type: string
+                            description: 'Defines environment variables set in the container. Any boolean values: true, false, yes, no, SHOULD be enclosed in quotes to ensure they are not converted to True or False by the YAML parser.'
+                            nullable: true
+                            type: object
+                          image:
+                            description: |-
+                              Specify the external image to be launched when it’s a reference kind of manifest. Or by default, leave it empty and Amphitheatre will automatically create it based on the current registry and name.
+
+                              The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].
+                            nullable: true
+                            type: string
+                          services:
+                            description: Defines the behavior of a service
+                            items:
+                              description: Defines the behavior of a service
+                              properties:
+                                kind:
+                                  description: Type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
+                                  nullable: true
+                                  type: string
+                                ports:
+                                  description: The list of ports that are exposed by this service.
+                                  items:
+                                    description: List of ports to expose from the container.
+                                    properties:
+                                      expose:
+                                        description: Exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
+                                        nullable: true
+                                        type: boolean
+                                      port:
+                                        description: The port that will be exposed by this service.
+                                        format: int32
+                                        type: integer
+                                      protocol:
+                                        description: The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
+                                        nullable: true
+                                        type: string
+                                    required:
+                                    - port
+                                    type: object
+                                  type: array
+                              required:
+                              - ports
+                              type: object
+                            nullable: true
+                            type: array
+                        type: object
+                      meta:
+                        description: Contains all the information about a character.
+                        properties:
+                          authors:
+                            description: The authors of the character.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          categories:
+                            description: Categories of the character.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          description:
+                            description: A description of the character.
+                            nullable: true
+                            type: string
+                          documentation:
+                            description: URL of the character documentation.
+                            nullable: true
+                            type: string
+                          homepage:
+                            description: URL of the character homepage.
+                            nullable: true
+                            type: string
+                          keywords:
+                            description: Keywords for the character.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          license:
+                            description: The character license.
+                            nullable: true
+                            type: string
+                          license_file:
+                            description: Path to the text of the license.
+                            nullable: true
+                            type: string
+                          name:
+                            description: The name of the character.
+                            type: string
+                          publish:
+                            description: Can be used to prevent publishing the character.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          readme:
+                            description: Path to the character's README file.
+                            nullable: true
+                            type: string
+                          repository:
+                            description: URL of the character source repository. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                            type: string
+                          version:
+                            description: The version of the character.
+                            nullable: true
+                            type: string
+                        required:
+                        - name
+                        - repository
+                        type: object
+                      partners:
+                        additionalProperties:
+                          description: Specify Support for OpenAPI, it does not untagged. Your character can depend on other characters from Registry or other registries, git repositories, or subdirectories of project.
+                          oneOf:
+                          - required:
+                            - registry
+                          - required:
+                            - repository
+                          - required:
+                            - local
+                          properties:
+                            local:
+                              description: A partner that pulls a character from a local path.
+                              properties:
+                                path:
+                                  description: The path to the character.
+                                  type: string
+                              required:
+                              - path
+                              type: object
+                            registry:
+                              description: A partner that pulls a character from a registry.
+                              properties:
+                                registry:
+                                  description: The registry to pull the character from. Defaults to Catalog.
+                                  nullable: true
+                                  type: string
+                                version:
+                                  description: The version of the character to pull.
+                                  type: string
+                              required:
+                              - version
+                              type: object
+                            repository:
+                              description: Your characters can depend on other partners from other registries, git repositories, or subdirectories on your local file system.
+                              properties:
+                                branch:
+                                  description: Git branch the partner should be cloned from. eg. master or main
+                                  nullable: true
+                                  type: string
+                                path:
+                                  description: Relative path from the repo root to the configuration file. eg. getting-started/.amp.toml. default is `.amp.toml`.
+                                  nullable: true
+                                  type: string
+                                repo:
+                                  description: Source code repository the partner should be cloned from. e.g. https://github.com/amphitheatre-app/amphitheatre.git.
+                                  type: string
+                                rev:
+                                  description: A commit hash like rev = "4c59b707", or a named reference exposed by the remote repository such as rev = "refs/pull/493/head". What references are available varies by where the repo is hosted.
+                                  nullable: true
+                                  type: string
+                                tag:
+                                  description: Git tag the partner should be cloned from. eg. v1.0
+                                  nullable: true
+                                  type: string
+                              required:
+                              - repo
+                              type: object
+                          type: object
+                        description: Depend on other partners from other repositories, or subdirectories on your local file system.
+                        nullable: true
+                        type: object
+                    required:
+                    - meta
+                    type: object
+                  name:
+                    description: The name of the character.
+                    type: string
+                  registry:
+                    description: The preface from registry.
+                    nullable: true
+                    properties:
+                      registry:
+                        description: The registry to pull the character from. Defaults to Catalog.
+                        nullable: true
+                        type: string
+                      version:
+                        description: The version of the character to pull.
+                        type: string
+                    required:
+                    - version
+                    type: object
+                  repository:
+                    description: The preface from git repository.
+                    nullable: true
                     properties:
                       branch:
                         description: Git branch the partner should be cloned from. eg. master or main
@@ -240,10 +591,8 @@ spec:
                     required:
                     - repo
                     type: object
-                  manifest:
-                    type: string
-                  name:
-                    type: string
+                required:
+                - name
                 type: object
               sync:
                 description: Global sync mode, if enabled, pulls the latest code from source version control in real time via Webhook, etc. and then rebuilds and deploys it
@@ -253,7 +602,6 @@ spec:
                 description: The title of the playbook
                 type: string
             required:
-            - description
             - namespace
             - preface
             - title
