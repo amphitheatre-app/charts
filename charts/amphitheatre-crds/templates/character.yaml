@@ -128,6 +128,9 @@ spec:
                     nullable: true
                     type: array
                 type: object
+              live:
+                description: Whether this character is live or not
+                type: boolean
               meta:
                 description: Contains all the information about a character.
                 properties:
@@ -256,6 +259,7 @@ spec:
                 nullable: true
                 type: object
             required:
+            - live
             - meta
             type: object
         required:

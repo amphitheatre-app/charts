@@ -131,6 +131,9 @@ spec:
                         nullable: true
                         type: array
                     type: object
+                  live:
+                    description: Whether this character is live or not
+                    type: boolean
                   meta:
                     description: Contains all the information about a character.
                     properties:
@@ -259,11 +262,15 @@ spec:
                     nullable: true
                     type: object
                 required:
+                - live
                 - meta
                 type: object
               image:
                 description: 'The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].'
                 type: string
+              live:
+                description: Whether this actor is live or not
+                type: boolean
               name:
                 description: The name of the actor.
                 type: string
@@ -300,6 +307,7 @@ spec:
             required:
             - character
             - image
+            - live
             - name
             type: object
           status:
