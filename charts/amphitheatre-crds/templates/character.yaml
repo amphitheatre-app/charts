@@ -196,6 +196,9 @@ spec:
                 - name
                 - repository
                 type: object
+              once:
+                description: Exit after one sync with live mode
+                type: boolean
               partners:
                 additionalProperties:
                   description: Specify Support for OpenAPI, it does not untagged. Your character can depend on other characters from Registry or other registries, git repositories, or subdirectories of project.
@@ -261,6 +264,7 @@ spec:
             required:
             - live
             - meta
+            - once
             type: object
         required:
         - spec

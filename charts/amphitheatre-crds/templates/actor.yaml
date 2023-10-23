@@ -199,6 +199,9 @@ spec:
                     - name
                     - repository
                     type: object
+                  once:
+                    description: Exit after one sync with live mode
+                    type: boolean
                   partners:
                     additionalProperties:
                       description: Specify Support for OpenAPI, it does not untagged. Your character can depend on other characters from Registry or other registries, git repositories, or subdirectories of project.
@@ -264,6 +267,7 @@ spec:
                 required:
                 - live
                 - meta
+                - once
                 type: object
               image:
                 description: 'The image must follow the Open Container Specification addressable image format. such as: [<registry>/][<project>/]<image>[:<tag>|@<digest>].'
@@ -274,6 +278,9 @@ spec:
               name:
                 description: The name of the actor.
                 type: string
+              once:
+                description: Exit after one sync with live mode
+                type: boolean
               source:
                 description: The source of the actor.
                 nullable: true
@@ -309,6 +316,7 @@ spec:
             - image
             - live
             - name
+            - once
             type: object
           status:
             nullable: true
