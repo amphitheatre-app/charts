@@ -68,6 +68,12 @@ spec:
                             type: string
                           nullable: true
                           type: array
+                        platforms:
+                          description: The platforms to build the image for.
+                          items:
+                            type: string
+                          nullable: true
+                          type: array
                       type: object
                     deploy:
                       description: Describes how images are deploy.
@@ -326,6 +332,12 @@ spec:
                             type: array
                           include:
                             description: Files to include when building.
+                            items:
+                              type: string
+                            nullable: true
+                            type: array
+                          platforms:
+                            description: The platforms to build the image for.
                             items:
                               type: string
                             nullable: true
