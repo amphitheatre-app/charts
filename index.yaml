@@ -2352,6 +2352,15 @@ entries:
     version: 0.1.0
   amphitheatre-crds:
   - apiVersion: v2
+    created: "2024-01-15T07:02:35.692807555Z"
+    description: A Helm chart for Amphitheatre CRDs
+    digest: 408ce57d30fefcf80960f126705794c9d3395c296d47215ae3cfe468a1d3c714
+    name: amphitheatre-crds
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-crds-0.5.0/amphitheatre-crds-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2023-12-19T09:45:39.244695152Z"
     description: A Helm chart for Amphitheatre CRDs
     digest: 174fab94baee7124cec045ff95094ed8316e99503c873052053f09735a953c43
@@ -2453,4 +2462,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-15T02:54:13.759673569Z"
+generated: "2024-01-15T07:02:35.693066119Z"
