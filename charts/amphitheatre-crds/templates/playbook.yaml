@@ -282,8 +282,8 @@ spec:
                 description: The description of the playbook
                 nullable: true
                 type: string
-              namespace:
-                description: Namespace for its managed resources and Actor deployment instances
+              id:
+                description: The Id of the playbook
                 type: string
               preface:
                 description: The starting character for this playbook
@@ -598,7 +598,7 @@ spec:
                 description: The title of the playbook
                 type: string
             required:
-            - namespace
+            - id
             - preface
             - title
             type: object
