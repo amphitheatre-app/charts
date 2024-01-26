@@ -30,46 +30,46 @@ kind: ConfigMap
 metadata:
   name: build-init-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-init@sha256:189b8a9cf31950615e1c7e4516f99c69c128ffbd4264b3c2c435d5aca86de26e
+  image: gcr.io/cf-build-service-public/kpack/build-init@sha256:92c6835bb9ea48c90042df0f96eef1b34e06ccf593c39ab79831e4b21f374423
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-init-windows-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-init-windows@sha256:c5c3beace3a10ad1119a8c031f98d6afb89a727211bc3a75bb565171e947d69d
+  image: gcr.io/cf-build-service-public/kpack/build-init-windows@sha256:c3eb52275df6d6abef7841741cc2106920b4f6f509da2d5d9334aaf671fbe584
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-waiter-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-waiter@sha256:d770e1c782a827c7532a29036fe73840b4301addf81aad5d2312d45d2a3d2175
+  image: gcr.io/cf-build-service-public/kpack/build-waiter@sha256:549daf44199a7e94afd8cbbcbe8837185d597d1a61548d27eafafd83bb1fa1bc
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rebase-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/rebase@sha256:5ca8b58d10eeb58d5796a9f2a69814cd1a34838da5115c25d9ca2263b9d32c7f
+  image: gcr.io/cf-build-service-public/kpack/rebase@sha256:955f76d02b4885d08f25071246021feae1a5622f5f8032ee53b1f23b689c7f2a
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lifecycle-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/lifecycle@sha256:35b5e30b71461448990ef739d8b6429d050c1e6f0693a5fe292f981365bb13f2
+  image: gcr.io/cf-build-service-public/kpack/lifecycle@sha256:0b1cd35012f7152053c42e0d6835cbb5b7c9c24207a0627f556bd931e678f8d7
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/completion@sha256:94bc8f1f05c511e75c5a55f67f57712772541c200a65d1b3e539b8f60ae56777
+  image: gcr.io/cf-build-service-public/kpack/completion@sha256:9a7b149ec23fa85bee6dbbc5fbc1e6d65228685768e56709967499cc66fe62df
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-windows-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/completion-windows@sha256:5ef19c84b032813cf525ac31a598cf1e07880cbbe3604b585df1d01ed204b8ec
+  image: gcr.io/cf-build-service-public/kpack/completion-windows@sha256:82d62a33b017680904975e33f76cd7256f3a987b84bd1e774a4262958ff9c43f

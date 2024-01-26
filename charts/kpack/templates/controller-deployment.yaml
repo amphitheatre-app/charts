@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: kpack-controller
-        version: dev
+        version: 0.12.3
     spec:
       securityContext:
         runAsNonRoot: true
@@ -32,7 +32,7 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: gcr.io/cf-build-service-public/kpack/controller@sha256:b399a5e304645be89666ac09340fc3a34e93f42c287a9574e9c8efbf664e518a
+        image: gcr.io/cf-build-service-public/kpack/controller@sha256:6a6e49d1bed164f151d2f8b9fbe24edd6a99c467fd6a747fb7b061a4c3529fc5
         env:
         - name: ENABLE_PRIORITY_CLASSES
           value: "false"
