@@ -186,6 +186,11 @@ crds:
   # Switch to install or uninstall the amphitheatre-crds helm chart
   install: true
 
+## @section Kpack Parameters
+kpack:
+  # Switch to enable or disable the kpack helm chart
+  enabled: true
+
 ## @section NATS Parameters
 nats:
   nats:

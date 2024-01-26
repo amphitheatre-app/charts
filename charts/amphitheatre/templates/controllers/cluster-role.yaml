@@ -42,3 +42,31 @@ rules:
 - apiGroups: ["events.k8s.io"]
   resources: ["events"]
   verbs: ["create"]
+
+- apiGroups:
+  - kpack.io
+  resources:
+  - builds
+  - builds/status
+  - images
+  - images/status
+  - builders
+  - builders/status
+  - buildpacks
+  - buildpacks/status
+  - clusterbuilders
+  - clusterbuilders/status
+  - clusterbuildpacks
+  - clusterbuildpacks/status
+  - clusterstores
+  - clusterstores/status
+  - clusterstacks
+  - clusterstacks/status
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - delete
+  - patch
+  - watch

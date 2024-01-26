@@ -140,12 +140,18 @@ The following table lists the configurable parameters of the Amphitheatre chart 
 |---------------------|-------------------------------------------|--------------|
 | crds.install        | Install or uninstall the amphitheatre-crds helm chart | `true` |
 
+### Kpack Parameters
+
+| Parameter           | Description                               | Default      |
+|---------------------|-------------------------------------------|--------------|
+| kpack.enabled        | Switch to enable or disable the kpack helm chart | `true` |
+
 ### NATS Parameters
 
 | Parameter           | Description                               | Default      |
 |---------------------|-------------------------------------------|--------------|
 | nats.nats.jetstream.enabled | Enable NATS JetStream               | `true`       |
-| nats.cluster.enabled       | Enable NATS Cluster                  | `true
+| nats.cluster.enabled       | Enable NATS Cluster                  | `true`      |
 
 ## Documentation
 
