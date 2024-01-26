@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: kpack-controller
-        version: 0.9.1-rc.1
+        version: dev
     spec:
       securityContext:
         runAsNonRoot: true
@@ -32,12 +32,14 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: gcr.io/cf-build-service-public/kpack/controller@sha256:cedc61102e25acc35fca56e46a884ccd4d28fc8f3736dba46f83865b94cffb50
+        image: gcr.io/cf-build-service-public/kpack/controller@sha256:b399a5e304645be89666ac09340fc3a34e93f42c287a9574e9c8efbf664e518a
         env:
         - name: ENABLE_PRIORITY_CLASSES
           value: "false"
         - name: INJECTED_SIDECAR_SUPPORT
           value: "false"
+        - name: INSECURE_SSH_TRUST_UNKNOWN_HOSTS
+          value: "true"
         - name: CONFIG_LOGGING_NAME
           value: config-logging
         - name: CONFIG_OBSERVABILITY_NAME
@@ -81,7 +83,6 @@ spec:
         resources:
           requests:
             cpu: 20m
-            memory: 100Mi
+            memory: 1Gi
           limits:
-            cpu: 100m
-            memory: 500Mi
+            memory: 1Gi

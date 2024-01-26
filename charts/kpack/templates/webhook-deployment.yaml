@@ -12,7 +12,7 @@ spec:
       labels:
         app: kpack-webhook
         role: kpack-webhook
-        version: 0.9.1-rc.1
+        version: dev
     spec:
       securityContext:
         runAsNonRoot: true
@@ -33,7 +33,7 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: gcr.io/cf-build-service-public/kpack/webhook@sha256:234295ce78187e351bfa20f81e03e49c4d789cebdfb20d077ab1f24ffe4f3df2
+        image: gcr.io/cf-build-service-public/kpack/webhook@sha256:2561c07f4953f4313aa566f379edab2975f6b35c574c300908ec06bb3e02d2e4
         ports:
         - name: https-webhook
           containerPort: 8443
