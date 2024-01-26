@@ -26,3 +26,4 @@
 Chart.lock
 
 *.sh
+.DS_Store
