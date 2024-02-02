@@ -2796,6 +2796,16 @@ entries:
     version: 0.1.5
   kpack:
   - apiVersion: v2
+    appVersion: 0.13.2
+    created: "2024-02-02T06:40:16.232965137Z"
+    description: A Helm chart for kpack
+    digest: 959d7528cd30b3d3c399722ec3d9a7f3949f09edadb9642f3b5b2e0165659060
+    name: kpack
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.2.2/kpack-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
     appVersion: 0.12.3
     created: "2024-01-26T12:44:11.415276557Z"
     description: A Helm chart for kpack
@@ -2835,4 +2845,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-31T17:38:06.123922446Z"
+generated: "2024-02-02T06:40:16.233240861Z"
