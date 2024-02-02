@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: kpack-controller
-        version: 0.12.3
+        version: 0.13.2
     spec:
       securityContext:
         runAsNonRoot: true
@@ -32,11 +32,13 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: gcr.io/cf-build-service-public/kpack/controller@sha256:6a6e49d1bed164f151d2f8b9fbe24edd6a99c467fd6a747fb7b061a4c3529fc5
+        image: ghcr.io/amphitheatre-app/kpack/controller@sha256:2e9c10dc51149b5dc7790e2dbbb27411f3ba60d62111f7bc778f4249fdf4c9b2
         env:
         - name: ENABLE_PRIORITY_CLASSES
           value: "false"
         - name: INJECTED_SIDECAR_SUPPORT
+          value: "false"
+        - name: EXPERIMENTAL_GENERATE_SLSA_ATTESTATION
           value: "false"
         - name: INSECURE_SSH_TRUST_UNKNOWN_HOSTS
           value: "true"
@@ -50,6 +52,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: SYSTEM_SERVICE_ACCOUNT
+          value: kpack-controller
         - name: BUILD_INIT_IMAGE
           valueFrom:
             configMapKeyRef:

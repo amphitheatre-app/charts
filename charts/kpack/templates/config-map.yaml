@@ -30,46 +30,46 @@ kind: ConfigMap
 metadata:
   name: build-init-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-init@sha256:92c6835bb9ea48c90042df0f96eef1b34e06ccf593c39ab79831e4b21f374423
+  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:78937dfcd61aa44da0c2425c6a1357c05142614758538a9643a2b2ec04362b95
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-init-windows-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-init-windows@sha256:c3eb52275df6d6abef7841741cc2106920b4f6f509da2d5d9334aaf671fbe584
+  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:8ab4d103f61708ee7c5a14f2d2cf948fe63edf1e5d7f76e13e345188b4325f85
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-waiter-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/build-waiter@sha256:549daf44199a7e94afd8cbbcbe8837185d597d1a61548d27eafafd83bb1fa1bc
+  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:06b5956c9c063f455b941d17da77d3d7e137845cbacdf33cf1fdbfa16be62799
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rebase-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/rebase@sha256:955f76d02b4885d08f25071246021feae1a5622f5f8032ee53b1f23b689c7f2a
+  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:95c3b80119e188e56811a3f53373b587b0c90f5980ae5a8f2ce38ca05e6a3837
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lifecycle-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/lifecycle@sha256:0b1cd35012f7152053c42e0d6835cbb5b7c9c24207a0627f556bd931e678f8d7
+  image: ghcr.io/amphitheatre-app/kpack/lifecycle@sha256:199043ac6fd40f772decb804ca92cdcbb22b76cf8db622761e25c39c2925d3b7
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/completion@sha256:9a7b149ec23fa85bee6dbbc5fbc1e6d65228685768e56709967499cc66fe62df
+  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:093a2fa6aecb75f38d967a49f3b761eccf98736c8bfc4397dd1dcc5a71c6e2ce
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-windows-image
 data:
-  image: gcr.io/cf-build-service-public/kpack/completion-windows@sha256:82d62a33b017680904975e33f76cd7256f3a987b84bd1e774a4262958ff9c43f
+  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:913526ac02cc7953736f7c3ad901e96dbf081ce3d6cc142522523b4cd923c977
