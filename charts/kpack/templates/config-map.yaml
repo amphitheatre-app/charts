@@ -30,28 +30,28 @@ kind: ConfigMap
 metadata:
   name: build-init-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:1f4a1c6a74d9d77565199dda45a252b1f6f3c81eb4d548cc8686005a2a125dff
+  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:7fc4d60e31273189a9655ff8105c02f54f1f0386b819796c97e559bc662ade09
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-init-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:ef478d79a5cb84523117a5fb48a20df61b60faf0f26f2dceb61d404a2137ddd6
+  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:c0f52c6b6e7f255d8f54674d39d87f8b8acdf760316a313e1de5145e99dd282d
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-waiter-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:111a7b1d3d93a8543bbd702fd72a30a5923487bdaede45f14e357bc9da05cd03
+  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:29c17c2ea07f3b3827a389470a289cb3a42545e9945ba2e886291ad6af8f1d18
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rebase-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:48113871840ced895957372cd8f1a63adf515f07e6bbcfca0478c8922e7b70f1
+  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:d31cf2275fbf4fc38198a2b88e7f190308cede8777abf1f58fbcdda4e38e40cb
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -65,11 +65,11 @@ kind: ConfigMap
 metadata:
   name: completion-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:856aa75770cefee1f7344f4fde62e54ce842cf7b97d5b0f27fb5ab7b8a5e71b2
+  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:4b2abef544f6507727a730e8d3b750f7aa7ed47c7642c521a9987b9b6648198c
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:003143af4f33ab6a881688ef55a0d3184f17597b17baa602d9d6dfbda01306a5
+  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:060e691aad66587ad9a87caf448d026719bfbacbf25f3baef1a6111a26c0eeb3

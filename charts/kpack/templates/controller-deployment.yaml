@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: kpack-controller
-        version: 0.13.3
+        version: 0.13.4
     spec:
       securityContext:
         runAsNonRoot: true
@@ -32,7 +32,7 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: ghcr.io/amphitheatre-app/kpack/controller@sha256:9b1b410259bd492e223648d0c6e84a11e246456dad63074e97cf3d78412f0e55
+        image: ghcr.io/amphitheatre-app/kpack/controller@sha256:6b4c82eec84dbca7930c5a1ece5f3c37a8c9b72d3f3bbf17c3e198ba81f6f7a7
         env:
         - name: ENABLE_PRIORITY_CLASSES
           value: "false"
