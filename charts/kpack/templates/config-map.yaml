@@ -30,28 +30,28 @@ kind: ConfigMap
 metadata:
   name: build-init-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:78937dfcd61aa44da0c2425c6a1357c05142614758538a9643a2b2ec04362b95
+  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:1f4a1c6a74d9d77565199dda45a252b1f6f3c81eb4d548cc8686005a2a125dff
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-init-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:8ab4d103f61708ee7c5a14f2d2cf948fe63edf1e5d7f76e13e345188b4325f85
+  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:ef478d79a5cb84523117a5fb48a20df61b60faf0f26f2dceb61d404a2137ddd6
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-waiter-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:06b5956c9c063f455b941d17da77d3d7e137845cbacdf33cf1fdbfa16be62799
+  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:111a7b1d3d93a8543bbd702fd72a30a5923487bdaede45f14e357bc9da05cd03
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rebase-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:95c3b80119e188e56811a3f53373b587b0c90f5980ae5a8f2ce38ca05e6a3837
+  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:48113871840ced895957372cd8f1a63adf515f07e6bbcfca0478c8922e7b70f1
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -65,11 +65,11 @@ kind: ConfigMap
 metadata:
   name: completion-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:093a2fa6aecb75f38d967a49f3b761eccf98736c8bfc4397dd1dcc5a71c6e2ce
+  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:856aa75770cefee1f7344f4fde62e54ce842cf7b97d5b0f27fb5ab7b8a5e71b2
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:913526ac02cc7953736f7c3ad901e96dbf081ce3d6cc142522523b4cd923c977
+  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:003143af4f33ab6a881688ef55a0d3184f17597b17baa602d9d6dfbda01306a5
