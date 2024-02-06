@@ -12,7 +12,7 @@ spec:
       labels:
         app: kpack-webhook
         role: kpack-webhook
-        version: 0.13.4
+        version: 0.13.2-volume.1
     spec:
       securityContext:
         runAsNonRoot: true
@@ -33,7 +33,7 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: ghcr.io/amphitheatre-app/kpack/webhook@sha256:9d5b0ec3091ecf8d444eefcb72cc2413cbfada23b32a9c296c526d5cf6a78d10
+        image: ghcr.io/amphitheatre-app/kpack/webhook@sha256:76653f0f7a39aac25bbe8d6ce7d098295eeea82be2f79b30a28537dbe00bd5d2
         ports:
         - name: https-webhook
           containerPort: 8443
