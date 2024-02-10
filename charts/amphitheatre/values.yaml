@@ -193,13 +193,14 @@ kpack:
 
 ## @section NATS Parameters
 nats:
-  nats:
+  config:
     jetstream:
       enabled: true
-  cluster:
-    enabled: true
-    # disable cluster advertisements when running behind a load balancer
-    noAdvertise: false
+    cluster:
+      enabled: true
+  natsBox:
+    enabled: false
+
 
 ## @section Metrics Server Parameters
 metrics-server:
