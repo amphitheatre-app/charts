@@ -43,6 +43,10 @@ rules:
   resources: ["events"]
   verbs: ["create"]
 
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
 - apiGroups:
   - kpack.io
   resources:
