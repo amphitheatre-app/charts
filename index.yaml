@@ -3,6 +3,41 @@ entries:
   amphitheatre:
   - apiVersion: v2
     appVersion: v0.8.16
+    created: "2024-02-23T04:08:40.737795769Z"
+    dependencies:
+    - condition: crds.install
+      name: amphitheatre-crds
+      repository: https://charts.amphitheatre.app
+      version: 0.5.0
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    - condition: gateway.enabled
+      name: gateway-helm
+      repository: oci://docker.io/envoyproxy
+      version: v0.0.0-latest
+    - condition: kpack.enabled
+      name: kpack
+      repository: https://charts.amphitheatre.app
+      version: 0.2.5
+    - condition: metrics-server.enabled
+      name: metrics-server
+      repository: https://kubernetes-sigs.github.io/metrics-server/
+      version: 3.12.0
+    - name: nats
+      repository: https://nats-io.github.io/k8s/helm/charts/
+      version: 1.1.8
+    description: A Helm chart for Kubernetes
+    digest: 4db50987e34e0c1253d396ced8504ab00616746f391ba241f8c6ec044b76e265
+    name: amphitheatre
+    type: application
+    urls:
+    - https://github.com/amphitheatre-app/charts/releases/download/amphitheatre-0.12.17/amphitheatre-0.12.17.tgz
+    version: 0.12.17
+  - apiVersion: v2
+    appVersion: v0.8.16
     created: "2024-02-23T03:59:23.263726807Z"
     dependencies:
     - condition: crds.install
@@ -3295,4 +3330,4 @@ entries:
     urls:
     - https://github.com/amphitheatre-app/charts/releases/download/kpack-0.1.0/kpack-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-23T03:59:23.264093163Z"
+generated: "2024-02-23T04:08:40.738106212Z"
