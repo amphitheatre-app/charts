@@ -47,6 +47,10 @@ rules:
   resources: ["persistentvolumeclaims"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
 - apiGroups:
   - kpack.io
   resources:
