@@ -134,6 +134,12 @@ The following table lists the configurable parameters of the Amphitheatre chart 
 | controllers.affinity        | Affinity settings for the Controllers pods                                                                  | `{}`                  |
 | controllers.debug           | Enable debug mode for the Controllers                                                                       | `true`                |
 
+### Persistence Parameters
+
+| Parameter           | Description                               | Default      |
+|---------------------|-------------------------------------------|--------------|
+| persistence.storageClass        | Persistent Volume storage class | `""` |
+
 ### Amphitheatre CRDs Parameters
 
 | Parameter           | Description                               | Default      |
