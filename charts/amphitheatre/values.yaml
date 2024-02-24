@@ -184,7 +184,7 @@ controllers:
 ## @section Persistence Parameters
 persistence:
   # Persistent Volume storage class
-  storageClass: ""
+  storageClass: "standard"
 
 ## @section Amphitheatre CRDs Parameters
 crds:

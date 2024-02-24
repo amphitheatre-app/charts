@@ -136,9 +136,17 @@ The following table lists the configurable parameters of the Amphitheatre chart 
 
 ### Persistence Parameters
 
+When deployed in clusters with multiple nodes, PVCs created by `amp-controllers`
+require the `access_modes` to be `["ReadWriteMany"]`, so the `storageClass` here
+needs to be set to a StorageClass that supports that mode.
+
+If your Kubernetes hosting platform doesn't provide a suitable StorageClass, you
+can try the [Dynamic NFS Volume
+Provisioner](https://github.com/openebs/dynamic-nfs-provisioner).
+
 | Parameter           | Description                               | Default      |
 |---------------------|-------------------------------------------|--------------|
-| persistence.storageClass        | Persistent Volume storage class | `""` |
+| persistence.storageClass        | Persistent Volume storage class | `"standard"` |
 
 ### Amphitheatre CRDs Parameters
 
