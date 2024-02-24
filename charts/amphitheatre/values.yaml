@@ -183,8 +183,10 @@ controllers:
 
 ## @section Persistence Parameters
 persistence:
-  # Persistent Volume storage class
+  # Persistent Volume storage class name
   storageClass: "standard"
+  # Persistent Volume Access Mode
+  accessMode: "ReadWriteOnce"
 
 ## @section Amphitheatre CRDs Parameters
 crds:

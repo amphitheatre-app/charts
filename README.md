@@ -146,7 +146,8 @@ Provisioner](https://github.com/openebs/dynamic-nfs-provisioner).
 
 | Parameter           | Description                               | Default      |
 |---------------------|-------------------------------------------|--------------|
-| persistence.storageClass        | Persistent Volume storage class | `"standard"` |
+| persistence.storageClass        | Persistent Volume storage class name | `"standard"` |
+| persistence.accessMode          | Persistent Volume access mode | `"ReadWriteOnce"` |
 
 ### Amphitheatre CRDs Parameters
 

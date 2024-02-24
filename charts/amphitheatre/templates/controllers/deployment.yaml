@@ -40,10 +40,10 @@ spec:
               value: {{ include "amphitheatre.controllers.serviceAccountName" . }}
             - name: AMP_NATS_URL
               value: {{ include "amphitheatre.nats.url" . | quote }}
-            {{- if .Values.persistence.storageClass }}
-            - name: AMP_STORAGE_CLASS_NAME
+            - name: AMP_PV_STORAGE_CLASS_NAME
               value: {{ .Values.persistence.storageClass | quote }}
-            {{- end }}
+            - name: AMP_PV_ACCESS_MODE
+              value: {{ .Values.persistence.accessMode | quote }}
             {{- if .Values.controllers.debug }}
             - name: RUST_LOG
               value: amp=DEBUG
