@@ -30,28 +30,28 @@ kind: ConfigMap
 metadata:
   name: build-init-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:926aa34112c62ca6c49d8370fb4cfdfaea7d47ed8a3c3e254655526a4a081158
+  image: ghcr.io/amphitheatre-app/kpack/build-init@sha256:456781fb9bf5e4b15959dcc2a1afbcb6e89f3ad0ab416f973e24489864088e30
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-init-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:e9adb6ba4d57e9929fae7f2709a7d1061bd37139139949333d457d7d72907ee4
+  image: ghcr.io/amphitheatre-app/kpack/build-init-windows@sha256:e279a3b19646fa42a54bd42653fa294aac788b6e1d669c470521cc907a8e70e0
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: build-waiter-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:165eba3b0c508fd61c6ebd0bdd4f51184d2b97e43bbeb45facb6b3caa752ba48
+  image: ghcr.io/amphitheatre-app/kpack/build-waiter@sha256:223f1402a1305448f6c8cb51970d4f193f363f06ed7876abc0f9b4504c12faa0
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rebase-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:c10b53d6e77f65fe75dae702c074655b3977e5a73db14fcd233b4a6469d8e670
+  image: ghcr.io/amphitheatre-app/kpack/rebase@sha256:c592deaf305d5c7710e50702dd413cffa652ee44862ba87c7b752f2b8b9a6472
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -65,11 +65,11 @@ kind: ConfigMap
 metadata:
   name: completion-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:0b96c1997a463c7f0cc35246f126a39d7698310d689965cdd6b866dd64064ed5
+  image: ghcr.io/amphitheatre-app/kpack/completion@sha256:54fcbdbcb45c999ec304cc2a2760e08554640826b0309d13b04ac98dfbf37055
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: completion-windows-image
 data:
-  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:e0abe02a98cb77f3d3e22ea17ed88c7ae682c62cd0f711fde4b0e1322b460f38
+  image: ghcr.io/amphitheatre-app/kpack/completion-windows@sha256:c0a78fad840730bfb5c1236f88294cb4aa0628dd66c32e13bd3df99da0553ea2
