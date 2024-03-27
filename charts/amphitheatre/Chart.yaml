@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.12.24
+version: 0.12.25
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -39,7 +39,7 @@ dependencies:
     condition: gateway.enabled
   - name: kpack
     repository: https://charts.amphitheatre.app
-    version: 0.2.5
+    version: 0.2.6
     condition: kpack.enabled
   - name: metrics-server
     repository: https://kubernetes-sigs.github.io/metrics-server/
